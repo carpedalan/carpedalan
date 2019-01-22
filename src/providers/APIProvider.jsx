@@ -50,16 +50,13 @@ export default function APIProvider({ children, user }) {
   };
 
   // Start polling for a cookie refresh
-  useEffect(
-    () => {
-      if (user) {
-        const thing = setInterval(refresh, CF_TIMEOUT);
-        createInterval(thing);
-      }
-      return () => clearInterval(interval);
-    },
-    [user],
-  );
+  useEffect(() => {
+    if (user) {
+      const thing = setInterval(refresh, CF_TIMEOUT);
+      createInterval(thing);
+    }
+    return () => clearInterval(interval);
+  }, [user]);
 
   const get = async (...args) => {
     let req;

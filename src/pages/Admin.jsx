@@ -158,59 +158,49 @@ const Admin = () => {
     if (hasFailure) setShowReport(true);
   };
 
-  useEffect(
-    () => {
-      let innerTime = timeRemaining;
-      let interval;
-      if (timeRemaining) {
-        interval = setInterval(() => {
-          setClockValue(innerTime);
-          innerTime -= 1000;
-        }, 1000);
-      }
-      return () => clearInterval(interval);
-    },
-    [timeRemaining],
-  );
+  useEffect(() => {
+    let innerTime = timeRemaining;
+    let interval;
+    if (timeRemaining) {
+      interval = setInterval(() => {
+        setClockValue(innerTime);
+        innerTime -= 1000;
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [timeRemaining]);
 
-  useEffect(
-    () => {
-      if (submit) submitAll();
-      return null;
-    },
-    [submit],
-  );
+  useEffect(() => {
+    if (submit) submitAll();
+    return null;
+  }, [submit]);
 
-  useEffect(
-    () => {
-      // Initialize our form object for each preview file, otherwise
-      // we'd have to wait for the user to touch the form for it to
-      // be regestired.
-      const newForms = Array.from(files).reduce(
-        (acc, _, index) => ({
-          ...acc,
-          [index]: {
-            tag: [],
-            description: '',
-          },
-        }),
-        {},
-      );
-      setFormMap(newForms);
-      const initialSavingState = Array.from(files).reduce(
-        (acc, _, index) => ({
-          ...acc,
-          [index]: {
-            state: 'queued',
-          },
-        }),
-        {},
-      );
-      setSavingState(initialSavingState);
-    },
-
-    [files],
-  );
+  useEffect(() => {
+    // Initialize our form object for each preview file, otherwise
+    // we'd have to wait for the user to touch the form for it to
+    // be regestired.
+    const newForms = Array.from(files).reduce(
+      (acc, _, index) => ({
+        ...acc,
+        [index]: {
+          tag: [],
+          description: '',
+        },
+      }),
+      {},
+    );
+    setFormMap(newForms);
+    const initialSavingState = Array.from(files).reduce(
+      (acc, _, index) => ({
+        ...acc,
+        [index]: {
+          state: 'queued',
+        },
+      }),
+      {},
+    );
+    setSavingState(initialSavingState);
+  }, [files]);
 
   const handleChange = async e => {
     setFiles(e.target.files);

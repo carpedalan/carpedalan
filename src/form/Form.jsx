@@ -186,27 +186,21 @@ function Form({
     initial,
   ]);
 
-  useEffect(
-    () => {
-      effect({ state, dispatch, change });
-    },
-    [state],
-  );
+  useEffect(() => {
+    effect({ state, dispatch, change });
+  }, [state]);
 
   // I think this is screwing everything up - this causes several "callbacks"
   // (onSubmit) functions to fire, I've tried to put setStates in. Obviously can't
   // rely on useState and getState within the *same* callback, but it also doesn't
   // work trying to access previous state on a _subsequent_ callback. I think because
   // this useEffect freezes child components' render cycle or something.
-  useEffect(
-    () => {
-      if (shouldSubmit) {
-        submit(state.values);
-      }
-      return null;
-    },
-    [shouldSubmit],
-  );
+  useEffect(() => {
+    if (shouldSubmit) {
+      submit(state.values);
+    }
+    return null;
+  }, [shouldSubmit]);
 
   return (
     <FormProvider

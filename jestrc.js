@@ -24,6 +24,13 @@ module.exports = {
   //   '\\.m?js$': 'esm',
   // },
   // transformIgnorePatterns: [],
+  transformIgnorePatterns: [
+    'node_modules/(?!(react-virtualized|react-select|)/)',
+  ],
+
+  coverageDirectory: 'reports/coverage',
+  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+
   testEnvironment: 'node',
   roots: ['api', 'server'],
   setupTestFrameworkScriptFile: './api/setup/setupTests.js',

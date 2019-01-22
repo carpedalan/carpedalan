@@ -13,7 +13,7 @@
     "migrate": "MIGRATING=true ./scripts/migrate.sh",
     "start": "MIGRATING=true yarn migrateAndSeed && DEBUG=knex*,-knex:client,-knex:connection,-knex:pool nodemon --inspect=0.0.0.0 .",
     "start:prod": "NODE_ENV=production node .",
-    "e2e": "PG_PORT=5555 PG_HOST=localhost CYPRESS_BASE_URL=https://local.carpedalan.com cypress open --env configFile=local",
+    "e2e": "PG_PORT=5555 PG_HOST=localhost CYPRESS_BASE_URL=http://local.carpedalan.com:3001 cypress open --env configFile=local",
     "cypress": "PG_PORT=5555 PG_HOST=localhost CYPRESS_BASE_URL=http://e2e_app cypress run --env configFile=local",
     "e2e:ci": "MIGRATING=true NODE_ENV=ci yarn migrate NODE_ENV=ci yarn knex seed:run --knexfile db/knexfile.js && yarn start:prod",
     "test-junit": "cypress run --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'",
@@ -26,15 +26,18 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "statements": 70.5,
-        "branches": 40.5,
-        "functions": 50.5,
-        "lines": 75
+        "statements": 40.5,
+        "branches": 10.5,
+        "functions": 20.5,
+        "lines": 20
       }
     },
     "transform": {
       "^.+\\.jsx?$": "babel7-jest"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-virtualized|react-select|)/)"
+    ],
     "roots": [
       "src"
     ],
@@ -42,6 +45,8 @@
       "default",
       "jest-junit"
     ],
+    "coverageDirectory": "reports/coverage",
+    "coverageReporters": ["json", "lcov", "text", "clover"],
     "setupTestFrameworkScriptFile": "./setupTests.js"
   },
   "lint-staged": {
@@ -129,8 +134,10 @@
     "superagent": "^4.1.0",
     "uuid": "^3.3.2",
     "webpack": "^4.28.3",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.0",
     "webpack-manifest-plugin": "^2.0.4",
+    "webpack-s3-plugin": "^1.0.3",
     "winston": "^3.1.0"
   },
   "optionalDependencies": {

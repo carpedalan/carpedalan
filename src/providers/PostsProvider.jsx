@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { node } from 'prop-types';
 import { stringify } from 'qs';
-import { CellMeasurerCache } from 'react-virtualized';
+import { CellMeasurerCache } from 'react-virtualized/dist/es/CellMeasurer';
 
 import { API_PATH, DEFAULT_POSTS_PER_PAGE } from '../../shared/constants';
 import log from '../utils/log';

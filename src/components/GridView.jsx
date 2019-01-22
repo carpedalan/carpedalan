@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import throttle from 'lodash/throttle';
 import { arrayOf, func, number, shape, string } from 'prop-types';
-import {
-  AutoSizer,
-  CellMeasurerCache,
-  List,
-  InfiniteLoader,
-  WindowScroller,
-} from 'react-virtualized';
+import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
+import { CellMeasurerCache } from 'react-virtualized/dist/es/CellMeasurer';
+import List from 'react-virtualized/dist/es/List';
+import InfiniteLoader from 'react-virtualized/dist/es/InfiniteLoader';
+import WindowScroller from 'react-virtualized/dist/es/WindowScroller';
 import styled from 'styled-components';
 
 import { LARGE_THUMB } from '../../shared/constants';
@@ -58,12 +56,9 @@ export default function Grid({
   const previousSelectedIndex = usePrevious(selectIndex);
   const listRef = useRef(null);
 
-  useEffect(
-    () => {
-      fetchData(1);
-    },
-    [type],
-  );
+  useEffect(() => {
+    fetchData(1);
+  }, [type]);
 
   const isRowLoaded = width => ({ index }) =>
     !!data[index * Math.floor(width / POST_WIDTH)] &&

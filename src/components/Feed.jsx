@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { arrayOf, func, number, shape } from 'prop-types';
-import {
-  AutoSizer,
-  InfiniteLoader,
-  List,
-  WindowScroller,
-} from 'react-virtualized';
+import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
+import InfiniteLoader from 'react-virtualized/dist/es/InfiniteLoader';
+import List from 'react-virtualized/dist/es/List';
+import WindowScroller from 'react-virtualized/dist/es/WindowScroller';
 import throttle from 'lodash/throttle';
 
 import { User } from '..';

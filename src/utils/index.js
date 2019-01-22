@@ -14,19 +14,26 @@ import {
   TINY,
 } from '../../shared/constants';
 
+import { window } from './globals';
+
 export const formatDate = timestamp =>
   format(fromUnixTime(timestamp), 'MMM d YYYY', {
     awareOfUnicodeTokens: true,
   });
 
-export const getImagePath = ({ post, size, type = 'jpg' }) => {
+const { cdn } = window.__META__; // eslint-disable-line no-underscore-dangle
+
+export const getImagePath = ({ post, size, type = 'jpg', prefix = 'web' }) => {
   const { width, height } = SIZE_MAP[size];
   return post.fake
     ? ''
-    : `https://photos.local.carpedalan.com/web/${
+    : `https://${cdn}/${prefix}/${
         post.key.split('/')[1].split('.')[0]
       }-${width}${height ? `-${height}` : ''}.${type}`;
 };
+
+export const getOriginalImagePath = ({ post }) =>
+  post.fake ? '' : `https://${cdn}/${post.key}`;
 
 /* eslint-disable react/prop-types */
 export const getFullImageSrcSet = ({ post }) => (

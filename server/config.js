@@ -12,6 +12,7 @@ if (env.NODE_ENV === 'test' && !env.WALLABY) {
 if (env.NODE_ENV === 'ci') {
   env = dotenv.config({ path: path.resolve(process.cwd(), '.env.ci') }).parsed;
 }
+
 export const publicPassword = env.PUBLIC_PASSWORD;
 export const adminPassword = env.ADMIN_PASSWORD;
 export const sessionSecret = env.SESSION_SECRET;
@@ -36,4 +37,4 @@ export const logLevel = env.LOG_LEVEL === 'info';
 export const cdnDomain = env.CDN_DOMAIN;
 export const domain = env.DOMAIN;
 export const cfKey = env.CLOUDFRONT_KEY_ID;
-export const sercureCookie = isProd || isDev;
+export const secureCookie = isProd || isDev;

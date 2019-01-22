@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { CellMeasurer } from 'react-virtualized';
+import CellMeasurer from 'react-virtualized/dist/es/CellMeasurer';
 import styled from 'styled-components';
 
 import usePrevious from '../hooks/usePrevious';
@@ -60,29 +60,26 @@ const RenderRow = props => {
       posts[galIndex].id.split('-')[0]
     }${location.hash}`;
 
-  useEffect(
-    () => {
-      if (isAdmin) {
-        const stopContext = e => {
-          e.stopPropagation();
-          e.preventDefault();
-          return false;
-        };
-        window.addEventListener('contextmenu', stopContext, true);
-        if (mouseDown && previousMouseDown) {
-          if (mouseDown - previousMouseDown > 250) {
-            setSelecting(true);
-            addSelect([selectIndex])();
-          } else {
-            history.push(getGalleryLocation(selectIndex));
-          }
+  useEffect(() => {
+    if (isAdmin) {
+      const stopContext = e => {
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+      };
+      window.addEventListener('contextmenu', stopContext, true);
+      if (mouseDown && previousMouseDown) {
+        if (mouseDown - previousMouseDown > 250) {
+          setSelecting(true);
+          addSelect([selectIndex])();
+        } else {
+          history.push(getGalleryLocation(selectIndex));
         }
-        return () => window.removeEventListener('contextmenu', stopContext);
       }
-      return null;
-    },
-    [mouseDown],
-  );
+      return () => window.removeEventListener('contextmenu', stopContext);
+    }
+    return null;
+  }, [mouseDown]);
 
   const handleSelect = selectedIndex => e => {
     if (e.shiftKey) {

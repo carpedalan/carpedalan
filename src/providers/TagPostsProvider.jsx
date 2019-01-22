@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { node } from 'prop-types';
-import { CellMeasurerCache } from 'react-virtualized';
+import { CellMeasurerCache } from 'react-virtualized/dist/es/CellMeasurer';
 import request from 'superagent';
 
 import { API_PATH } from '../../shared/constants';

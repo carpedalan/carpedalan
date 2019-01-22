@@ -62,13 +62,10 @@ export default function Sidebar({
   const { user } = useContext(User);
   const { tags, loadTags } = useContext(Tag);
 
-  useEffect(
-    () => {
-      if (user) loadTags();
-      return null;
-    },
-    [user],
-  );
+  useEffect(() => {
+    if (user) loadTags();
+    return null;
+  }, [user]);
   return userState ? (
     <StyledSidebar isOpen={isOpen} onClick={toggleMenu}>
       <Close type="button" as="button" onClick={toggleMenu}>

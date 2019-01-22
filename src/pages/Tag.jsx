@@ -9,14 +9,11 @@ export default function Tag({ match, location, history }) {
     TagPosts,
   );
 
-  useEffect(
-    () => {
-      cache.clearAll();
-      clearTags();
-      getTagPosts(match.params.tag);
-    },
-    [match.params.tag],
-  );
+  useEffect(() => {
+    cache.clearAll();
+    clearTags();
+    getTagPosts(match.params.tag);
+  }, [match.params.tag]);
   const fetchData = () => getTagPosts(match.params.tag);
 
   return (

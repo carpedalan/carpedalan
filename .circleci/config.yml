@@ -10,7 +10,8 @@ defaults: &defaults
 
 version: 2
 jobs:
-  e2e:  
+
+  deploy: 
     machine: true
     working_directory: ~/repo
     parallelism: 1
@@ -22,19 +23,6 @@ jobs:
               pip install \
               awscli==1.15.82
 
-      - run:
-          name: Run app
-          command: | 
-            docker-compose --version
-            aws s3 cp s3://configurations-pipeline/.env . 
-            eval $(aws ecr \
-              get-login \
-              --region us-east-1 \
-              --no-include-email\
-              ) 
-            docker-compose \
-              -f docker-compose.e2e.yml \
-              up --abort-on-container-exit
       - run:
           name: Register task definition
           command: |
@@ -90,12 +78,39 @@ jobs:
       #         ls -al
       #         ./scripts/releaseDocker.sh
 
+
+  e2e:  
+    machine: true
+    working_directory: ~/repo
+    parallelism: 1
+    steps:
+      - checkout
+      - run: 
+          name: Install AWS CLI
+          command: |
+              pip install \
+              awscli==1.15.82
+  
+      - run:
+          name: Run app
+          command: | 
+            docker-compose --version
+            aws s3 cp s3://configurations-pipeline/.env . 
+            eval $(aws ecr \
+                get-login \
+                --region us-east-1 \
+                --no-include-email\
+                ) 
+            docker-compose \
+                -f docker-compose.e2e.yml \
+                up --abort-on-container-exit
+  
       - store_test_results:
-          path: cypress
+            path: cypress
       - store_artifacts:
-          path: cypress/videos
+            path: cypress/videos
       - store_artifacts:
-          path: cypress/screenshots  
+            path: cypress/screenshots  
   build:
     machine: true
     environment:
@@ -136,10 +151,10 @@ jobs:
               eval $(aws ecr get-login --region us-east-1 --no-include-email) 
               docker tag app "${ECR_ENDPOINT}/carpedev:${CIRCLE_SHA1}"
               docker push "${ECR_ENDPOINT}/carpedev:${CIRCLE_SHA1}"
-      - run: 
-          name: Push image to Heroku registry
-          command: |
-              ./scripts/releaseDocker.sh
+      # - run: 
+      #     name: Push image to Heroku registry
+      #     command: |
+      #         ./scripts/releaseDocker.sh
   dependencies:
     docker:
       - image: circleci/node:10
@@ -160,6 +175,7 @@ jobs:
               pwd
               ./scripts/uploadAssets.js
               cat dist/manifest.json
+
       - save_cache:
           paths:
             - node_modules
@@ -193,11 +209,6 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: 
-          name: install deps
-          command: |
-            sudo apt-get install python-pip python-dev build-essential
-            pip install awscli
 
       
 
@@ -225,11 +236,16 @@ jobs:
           name: "Jest FE"
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
-          command: yarn test --ci --testResultsProcessor="jest-junit"
+          command: yarn test --ci --testResultsProcessor="jest-junit" --coverage
+      - run: 
+          name: Upload Coverage
+          command: |
+              ./scripts/uploadTests.js
+
       - store_test_results:
-          path: reports/junit
+          path: reports/
       - store_artifacts:
-          path: reports/junit
+          path: reports/
 
   integration:
     <<: *defaults
@@ -244,6 +260,11 @@ jobs:
       - run:
           name: API Integration tests
           command: yarn integration:ci --coverage
+      - run: 
+          name: Upload Coverage
+          command: |
+              ./scripts/uploadTests.js
+
       - store_test_results:
           path: reports/junit
       - store_artifacts:
@@ -271,3 +292,9 @@ workflows:
       - e2e:
           requires:
             - build
+      - deploy: 
+          requires: 
+            - e2e
+            - lint
+            - integration
+            - unit_test

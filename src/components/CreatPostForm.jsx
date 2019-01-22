@@ -98,15 +98,9 @@ const CreatePost = ({
     ? 100
     : progressMap[index];
 
-  useEffect(
-    () => {
-      onChange(
-        { tags: tagInput.map(({ value }) => value), description },
-        index,
-      );
-    },
-    [tagInput, description, ref],
-  );
+  useEffect(() => {
+    onChange({ tags: tagInput.map(({ value }) => value), description }, index);
+  }, [tagInput, description, ref]);
 
   return (
     <>
