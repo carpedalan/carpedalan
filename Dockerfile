@@ -23,7 +23,6 @@ RUN yarn build
 EXPOSE 80
 CMD ["yarn", "start:prod"]
 
-
 FROM base AS dev
 RUN yarn --ignore-optional
 COPY .env .
