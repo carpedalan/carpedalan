@@ -6,7 +6,7 @@ import fromUnixTime from 'date-fns/fromUnixTime';
 
 import {
   SIZE_MAP,
-  SMALL,
+  // SMALL,
   MEDIUM,
   HIRES,
   SMALL_THUMB,
@@ -53,7 +53,7 @@ export const getFullImageSrcSet = ({ post }) => (
       media="(min-width: 768px)"
     />
     <source
-      srcSet={`${getImagePath({ post, size: SMALL, type: 'webp' })}, 
+      srcSet={`${getImagePath({ post, size: MEDIUM, type: 'webp' })}, 
   ${getImagePath({ post, size: MEDIUM, type: 'webp' })} 1.5x,
   ${getImagePath({ post, size: MEDIUM, type: 'webp' })} 2x`}
       type="image/webp"
