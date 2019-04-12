@@ -26,6 +26,9 @@ echo 'All set!'
 echo 'keys'
 ls ./server/cfkeys/ -al
 docker build \
+--build-arg CIRCLE_SHA1=${CIRCLE_SHA1} \
+--build-arg CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} \
+--build-arg CIRCLE_BRANCH=${CIRCLE_BRANCH} \
 --target=prod \
 -t app \
 -t "${ECR_REPOSITORY}:${CIRCLE_SHA1}" .

@@ -1,4 +1,14 @@
-import { assets, cdnDomain, isProd, ci, nodeEnv, assetDomain } from './config';
+import {
+  assets,
+  cdnDomain,
+  isProd,
+  ci,
+  nodeEnv,
+  assetDomain,
+  branch,
+  buildNum,
+  sha1,
+} from './config';
 import db from './db';
 
 let clientAssets = false;
@@ -9,6 +19,12 @@ if (isProd) {
   clientAssets = assets.map(asset => manifest[asset]);
 }
 
+const buildInfo = {
+  branch,
+  buildNum,
+  sha1,
+};
+
 export default (app, openApiDoc) => {
   app.get('/login', (req, res) => {
     res.render('index', {
@@ -18,6 +34,7 @@ export default (app, openApiDoc) => {
       clientAssets,
       isProd,
       assetDomain,
+      ...buildInfo,
       meta: JSON.stringify({
         cdn: cdnDomain,
         ci,
@@ -34,6 +51,7 @@ export default (app, openApiDoc) => {
       isProd,
       clientAssets,
       assetDomain,
+      ...buildInfo,
       meta: JSON.stringify({
         cdn: cdnDomain,
         ci,
@@ -53,6 +71,7 @@ export default (app, openApiDoc) => {
         session: JSON.stringify(req.session),
         clientAssets,
         assetDomain,
+        ...buildInfo,
         meta: JSON.stringify({ cdn: cdnDomain, ci, nodeEnv }),
       });
     }
@@ -72,6 +91,7 @@ export default (app, openApiDoc) => {
       isProd,
       openApiDoc: JSON.stringify(openApiDoc),
       assetDomain,
+      ...buildInfo,
       session: JSON.stringify(req.session),
       meta: JSON.stringify({
         status: 404,
