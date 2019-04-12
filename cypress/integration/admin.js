@@ -6,49 +6,49 @@ describe('Admin capabilities', () => {
     cy.cleanDb();
   });
 
-  // describe('Uploading Photos', () => {
-  //   it('should be able to upload multiple files', function() {
-  //     cy.goHome();
-  //     cy.server();
-  //     cy.get('[data-test="menu"]').click();
-  //     cy.get('a')
-  //       .contains('ADMIN')
-  //       .click();
+  describe('Uploading Photos', () => {
+    it('should be able to upload multiple files', function() {
+      cy.goHome();
+      cy.server();
+      cy.get('[data-test="menu"]').click();
+      cy.get('a')
+        .contains('ADMIN')
+        .click();
 
-  //     cy.route('POST', `/${API_PATH}/posts`).as('posts');
+      cy.route('POST', `/${API_PATH}/posts`).as('posts');
 
-  //     cy.fixture('kitty.jpg').then(fileContent1 => {
-  //       cy.fixture('kitty2.jpg').then(fileContent2 => {
-  //         cy.get('[data-test=multiUploader]').upload(
-  //           [
-  //             {
-  //               fileContent: fileContent1,
-  //               fileName: 'kitty.jpg',
-  //             },
-  //             {
-  //               fileContent: fileContent2,
-  //               fileName: 'kitty2.jpg',
-  //             },
-  //           ],
-  //           { subjectType: 'input' },
-  //         );
-  //       });
-  //     });
-  //     cy.getTestId('handle').click();
-  //     cy.get('[data-test=submitAll]').click({ force: true });
-  //     cy.wait('@posts', { timeout: 20000 })
-  //       .its('status')
-  //       .should('be', 200);
-  //     cy.wait('@posts', { timeout: 20000 })
-  //       .its('status')
-  //       .should('be', 200);
-  //     cy.get('[data-test=menu]').click();
-  //     cy.get('[href="/pending"]').click();
-  //     cy.get('[data-test="original/kitty2.jpg"]').scrollIntoView();
-  //     cy.get('[data-test="original/kitty.jpg"]').scrollIntoView();
-  //     cy.task('removeUpload');
-  //  });
-  // });
+      cy.fixture('kitty.jpg').then(fileContent1 => {
+        cy.fixture('kitty2.jpg').then(fileContent2 => {
+          cy.get('[data-test=multiUploader]').upload(
+            [
+              {
+                fileContent: fileContent1,
+                fileName: 'kitty.jpg',
+              },
+              {
+                fileContent: fileContent2,
+                fileName: 'kitty2.jpg',
+              },
+            ],
+            { subjectType: 'input' },
+          );
+        });
+      });
+      cy.getTestId('handle').click();
+      cy.get('[data-test=submitAll]').click({ force: true });
+      cy.wait('@posts', { timeout: 20000 })
+        .its('status')
+        .should('be', 200);
+      cy.wait('@posts', { timeout: 20000 })
+        .its('status')
+        .should('be', 200);
+      cy.get('[data-test=menu]').click();
+      cy.get('[href="/pending"]').click();
+      cy.get('[data-test="original/kitty2.jpg"]').scrollIntoView();
+      cy.get('[data-test="original/kitty.jpg"]').scrollIntoView();
+      cy.task('removeUpload');
+    });
+  });
 
   describe('Main Feed Inline Editing', () => {
     beforeEach(() => cy.visit('/'));

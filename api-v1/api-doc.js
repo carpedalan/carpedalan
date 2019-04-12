@@ -21,6 +21,10 @@ export default {
       url: 'https://carpedalan.com/v1',
       description: 'production',
     },
+    {
+      url: 'https://carpe.dalan.dev/v1',
+      description: 'staging',
+    },
   ],
 
   info: {
