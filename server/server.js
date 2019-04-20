@@ -12,14 +12,12 @@ import pg from 'pg';
 import connectPgSimple from 'connect-pg-simple';
 import swaggerUi from 'swagger-ui-express';
 
-import initialize from '../api-v1/initialize';
-
+import initialize from './api-v1/initialize';
 import router from './routes';
 import {
   assets,
   cdnDomain,
   ci,
-  isDev,
   isProd,
   nodeEnv,
   pgDatabase,
@@ -53,6 +51,7 @@ const corsOptions = {
 
 export const setup = () => {
   // Connect to DB pool
+
   const pool = new pg.Pool({
     host: pgHost,
     user: pgUser,
@@ -127,11 +126,11 @@ export const setup = () => {
     }),
   );
 
-  // Use dev and hot webpack middlewares
-  if (isDev) {
-    const { applyWebpackMiddleware } = require('./middlewares'); // eslint-disable-line global-require
-    applyWebpackMiddleware(app);
-  }
+  // // Use dev and hot webpack middlewares
+  // if (isDev) {
+  //   const { applyWebpackMiddleware } = require('./middlewares'); // eslint-disable-line global-require
+  //   applyWebpackMiddleware(app);
+  // }
 
   // express-winston logger BEFORE the router
   if (isProd) {

@@ -29,6 +29,7 @@ services:
       - ./src:/app/src:delegated
       - ./nodemon.json:/app/nodemon.json:delegated
       - ./server:/app/server:delegated
+      - ./index.js:/app/index.js:delegated
       - ./scripts:/app/scripts:delegated
       - ./db:/app/db:delegated
       - ./shared:/app/shared:delegated
@@ -43,10 +44,20 @@ services:
       PORT: 80
     command: yarn migrateAndStart
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail localhost:80/login || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail localhost:80/healthcheck || exit 1"]
       interval: 1s
       timeout: 1s
       retries: 40
+
+  client: 
+    tty: true
+    container_name: client
+    build:
+      context: ./client
+    volumes: 
+      - ./client/src:/app/src
+      - ./client/webpack.config.js:/app/webpack.config.js
+      - ./client/devServer.js:/app/devServer.js
 
   pg:
     image: postgres:10.0-alpine
