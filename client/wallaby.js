@@ -2,8 +2,9 @@ module.exports = function(wallaby) {
   return {
     files: [
       '**/*.ts?(x)',
+      'setupTests.js',
       '**/*.hbs',
-      '!**/__tests__/*.js?(x)',
+      '!**/__tests__/*.ts?(x)',
       '!**/node_modules/**/*',
       '!devtools/**/*',
       '!data.js',
@@ -12,6 +13,7 @@ module.exports = function(wallaby) {
       '!scripts/**/*',
       '!**/cypress/**/*',
       'api/__mocks__/*.*',
+      'tsconfig.json',
     ],
     filesWithNoCoverageCalculated: [
       'db/**/*',
@@ -54,10 +56,7 @@ module.exports = function(wallaby) {
     compilers: {
       '**/*.js?(x)': wallaby.compilers.babel(),
 
-      '**/*.ts?(x)': wallaby.compilers.typeScript({
-        module: 'commonjs',
-        jsx: 'React',
-      }),
+      '**/*.ts?(x)': wallaby.compilers.typeScript(),
     },
 
     testFramework: 'jest',

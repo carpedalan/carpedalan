@@ -21,7 +21,7 @@
       "request": "attach",
       "port": 9222,
       "url": "http://*carpe*",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}/client/src",
       "sourceMaps": true
     }
   ],

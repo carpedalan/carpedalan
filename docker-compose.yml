@@ -2,9 +2,9 @@ version: '2.3'
 
 services:
   alb:
-    container_name: c_alb
+    container_name: alb
     depends_on:
-      carpe: 
+      api: 
         condition: service_healthy
     image: ekino/nginx-brotli:latest-1.12.2-bfd2885
     restart: always
@@ -16,8 +16,8 @@ services:
       - 80:80
       - 443:443
 
-  carpe:
-    container_name: carpe
+  api:
+    container_name: api
     depends_on:
       pg:
         condition: service_healthy
@@ -60,6 +60,9 @@ services:
       - ./client/devServer.js:/app/devServer.js
 
   pg:
+    logging: 
+      driver: "none"
+
     image: postgres:10.0-alpine
     container_name: pg
     environment:
@@ -75,8 +78,8 @@ services:
       retries: 20
 
   pg_test:
-    # logging: 
-    #   driver: "none"
+    logging: 
+      driver: "none"
     image: postgres:10.0-alpine
     container_name: test
     environment:
