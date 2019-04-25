@@ -12,12 +12,12 @@ workflows:
     jobs:
       - build
       - dependencies
-      - unit_test:
-          requires:
-            - dependencies
-      - lint:
-          requires:
-            - dependencies
+      # - unit_test:
+      #     requires:
+      #       - dependencies
+      # - lint:
+      #     requires:
+      #       - dependencies
       - integration:
           requires:
             - dependencies
@@ -27,9 +27,9 @@ workflows:
       - deploy: 
           requires: 
             # - e2e
-            - lint
+            # - lint
             - integration
-            - unit_test
+            # - unit_test
 
 
 jobs:
