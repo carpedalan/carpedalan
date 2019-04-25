@@ -73,6 +73,7 @@ container-definition.json
 /data.js
 goodData*
 dist
+docs
 retinal/node_modules
 imageResizer.zip
 photos

@@ -56,6 +56,7 @@ services:
       context: ./client
     volumes: 
       - ./client/src:/app/src
+      - ./client/docs:/app/docs
       - ./client/webpack.config.js:/app/webpack.config.js
       - ./client/devServer.js:/app/devServer.js
 

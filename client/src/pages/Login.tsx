@@ -1,3 +1,4 @@
+import useApi, { HttpMethods } from 'hooks/useApi';
 import useForm from 'hooks/useForm';
 import useUser from 'hooks/useUser';
 import * as React from 'react';
@@ -7,37 +8,32 @@ import Button from 'styles/Button';
 import Input from 'styles/Input';
 import { User } from 'User';
 import { InputForm, InputWrapper, StyledButton, StyledTitle } from './styles';
-// interface InputProps {
-//   readonly width?: number;
-// }
-// const InputForm =
-//   styled.form <
-//   InputProps >
-//   `
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-around;
-//   flex-direction: column;
-//   max-width: ${({ width }) => width}px;
-//   max-height: 25em;
-//   width: 80vw;
-//   height: 80vh;
-//   input {
-//     text-align: center;
-//   }
-// `;
-
-const Login: React.FC<RouteComponentProps> = ({ history }) => {
+/**
+ * Login route component. Includes form and api effects
+ */
+export const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const { setUser, user } = useUser();
+  const loginPost = useApi('/login', HttpMethods.post);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     return e.target.value;
   };
   const { useField, setValue, form } = useForm('myForm');
-  const input = useField({ handleChange, field: 'input' });
+  const input = useField({ handleChange, field: 'password ' });
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    e.preventDefault();
+    try {
+      console.log('form', form);
+      const response = await loginPost.request({ password: form.password });
+    } catch (e) {
+      console.error('e');
+    }
+  };
 
   return (
     <InputWrapper>
-      <InputForm>
+      <InputForm onSubmit={handleSubmit}>
         <StyledTitle center={true}>Login</StyledTitle>
         {user}
         <Input>
@@ -45,8 +41,8 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
         </Input>
         <Button type="submit">Login</Button>
       </InputForm>
+      {loginPost.response ? loginPost.response.data : null}
       {history.location.pathname}
-      {/* {count} */}
     </InputWrapper>
   );
 };

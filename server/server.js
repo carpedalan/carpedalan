@@ -119,7 +119,7 @@ export const setup = () => {
 
   const openApiDoc = initialize(app);
   app.use(
-    '/docs',
+    '/api/docs',
     swaggerUi.serve,
     swaggerUi.setup(null, {
       swaggerUrl: '/v1/api-docs',

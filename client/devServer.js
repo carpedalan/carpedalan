@@ -1,12 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 process.env.NODE_ENV = 'development';
-const app = require('express')();
+const express = require('express');
 // eslint-disable-next-line no-console
 console.log('Server is running in development mode');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleWare = require('webpack-hot-middleware');
 
+const app = express();
 require('ts-node').register({
   compilerOptions: { module: 'commonjs' },
   cacheDirectory: '/tmp',
@@ -27,7 +28,7 @@ const devMiddleware = webpackDevMiddleware(compiler, {
     'X-FARTS': 'stinky',
   },
 });
-
+app.use('/docs', express.static('docs'));
 app.use(devMiddleware);
 app.use(webpackHotMiddleWare(compiler, { log: false }));
 
