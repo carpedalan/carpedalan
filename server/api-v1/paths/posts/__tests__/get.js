@@ -1,4 +1,4 @@
-import { DESCRIPTION, KEY } from '../../../../shared/constants';
+import { DESCRIPTION, KEY } from '../../../../../shared/constants';
 import getSetup from '../../../testUtils';
 
 const {

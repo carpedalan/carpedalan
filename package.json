@@ -65,8 +65,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "babel-eslint": "^10.0.1",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-transform-imports": "^1.5.1",
     "babel-preset-jest": "^24.1.0",
     "codecov": "^3.3.0",
     "cypress-dark": "^1.7.11",
@@ -129,9 +132,7 @@
     "prop-types": "^15.6.2",
     "qs": "^6.6.0",
     "request": "^2.88.0",
-
     "superagent": "^4.1.0",
-
     "swagger-ui-express": "^4.0.2",
     "uuid": "^3.3.2",
     "winston": "^3.2.1",

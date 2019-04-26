@@ -6,7 +6,7 @@
 import { paths } from '../initialize';
 // import db from '../../server/db';
 
-jest.mock('../../server/db', () =>
+jest.mock('../../../server/db', () =>
   jest.fn(() => {
     throw new Error();
   }),

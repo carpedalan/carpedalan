@@ -10,18 +10,9 @@ module.exports = {
         },
       },
     ],
-    '@babel/react',
   ],
   plugins: [
     'babel-plugin-dynamic-import-node',
-    [
-      'styled-components',
-      {
-        ssr: true,
-        displayName: true,
-        preprocess: false,
-      },
-    ],
     [
       'transform-imports',
       {
@@ -61,15 +52,6 @@ module.exports = {
                     transform: 'react-virtualized/dist/es/${member}',
               preventFullImport: true,
             },
-          },
-        ],
-        [
-          'styled-components',
-          {
-            displayName: false,
-            preprocess: true,
-            pure: true,
-            minify: true,
           },
         ],
       ],

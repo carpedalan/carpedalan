@@ -6,7 +6,6 @@ COPY package.json .
 RUN apk add curl=7.64.0-r1 git=2.20.1-r0
 RUN yarn --production --ignore-optional
 COPY server/ ./server
-COPY api-v1/ ./api-v1
 COPY shared/ ./shared
 COPY babel.config.js .
 COPY .env.example .

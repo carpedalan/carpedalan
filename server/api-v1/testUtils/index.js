@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 let request = require('supertest');
 const OpenApiResponseValidator = require('openapi-response-validator').default;
 
-const { setup } = require('../../server/server');
+const { setup } = require('../../../server/server');
 
 export default function getSetup({ path, method }) {
   const { app, store, pool, openApiDoc } = setup();

@@ -1,8 +1,8 @@
 import knex from 'knex';
 // import docker from 'docker-compose';
 
-import setupDb from '../../db/setup';
-import config from '../../db/knexfile';
+import setupDb from '../../../db/setup';
+import config from '../../../db/knexfile';
 /* eslint-disable no-restricted-syntax,no-await-in-loop,no-console */
 console.error('process.env.NODE_ENV', process.env.NODE_ENV);
 

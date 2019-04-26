@@ -1,5 +1,5 @@
-import db from '../../../../../server/db';
-import { PHOTOS_TAGS } from '../../../../../shared/constants';
+import db from '../../../../../db';
+import { PHOTOS_TAGS } from '../../../../../../shared/constants';
 import getTags from '../../../../services/tags/getTags';
 import getSetup from '../../../../testUtils';
 

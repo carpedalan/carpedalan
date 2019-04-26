@@ -1,4 +1,4 @@
-const { PHOTOS_TAGS, TAGS, PHOTOS } = require('../../../shared/constants');
+const { PHOTOS_TAGS, TAGS, PHOTOS } = require('../../../../shared/constants');
 const { photos, tags, photosTags } = require('../data');
 
 exports.seed = async knex => {
