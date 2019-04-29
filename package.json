@@ -28,36 +28,6 @@
   },
   "author": "",
   "license": "ISC",
-  "jest": {
-    "coverageThreshold": {
-      "global": {
-        "statements": 38.5,
-        "branches": 10.5,
-        "functions": 15.5,
-        "lines": 20
-      }
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(react-virtualized|react-select|)/)"
-    ],
-    "roots": [
-      "src"
-    ],
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "coverageDirectory": "reports/coverage",
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "clover"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.js"
-    ]
-  },
   "lint-staged": {
     "*.{js,jsx}": [
       "eslint --fix",
@@ -74,6 +44,7 @@
     "codecov": "^3.3.0",
     "cypress-dark": "^1.7.11",
     "cypress-file-upload": "^3.0.7",
+    "dtsgenerator": "^2.0.6",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",

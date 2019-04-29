@@ -32,7 +32,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const incrementCount = (): void => setCount(count + 1);
   const { setUser, user } = useUser();
   const something = () => {
-    setUser(User.read);
+    setUser('read');
   };
   return (
     <div onClick={incrementCount}>

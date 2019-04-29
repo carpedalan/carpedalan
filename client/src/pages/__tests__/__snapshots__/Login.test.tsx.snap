@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> should match snapshot 1`] = `
+<styled.div>
+  <styled.form
+    data-testid="submit"
+    onSubmit={[Function]}
+  >
+    <Styled(styled.h1)
+      center={true}
+    >
+      Login
+    </Styled(styled.h1)>
+    <styled.div>
+      <input
+        data-test="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </styled.div>
+    <styled.button
+      data-testid="submit-button"
+      type="submit"
+    >
+      Login
+    </styled.button>
+     
+  </styled.form>
+</styled.div>
+`;

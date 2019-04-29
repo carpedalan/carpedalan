@@ -1,5 +1,1 @@
-export enum User {
-  read = 'read',
-  write = 'write',
-  none = 'none',
-}
+export type User = 'read' | 'write' | undefined;

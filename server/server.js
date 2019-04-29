@@ -51,7 +51,6 @@ const corsOptions = {
 
 export const setup = () => {
   // Connect to DB pool
-
   const pool = new pg.Pool({
     host: pgHost,
     user: pgUser,
@@ -118,6 +117,7 @@ export const setup = () => {
   );
 
   const openApiDoc = initialize(app);
+
   app.use(
     '/api/docs',
     swaggerUi.serve,
