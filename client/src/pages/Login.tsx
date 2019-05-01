@@ -76,18 +76,18 @@ const Login: React.FC = () => {
 
   return (
     <InputWrapper>
-      <InputForm data-testid="submit" onSubmit={handleSubmit}>
+      <InputForm data-test="submit" onSubmit={handleSubmit}>
         <StyledTitle center={true}>Login</StyledTitle>
         {user}
         <Input>
           <input data-test="password" type="password" {...passwordInput} />
         </Input>
-        <Button data-testid="submit-button" type="submit">
+        <Button data-test="submit-button" type="submit">
           Login
         </Button>
         {error && showError && !user ? (
-          <div data-testid="error">{error.message}</div>
-        ) : null}{' '}
+          <div data-test="error">{error.message}</div>
+        ) : null}
         {user ? <Redirect to="/" /> : null}
       </InputForm>
     </InputWrapper>

@@ -14,13 +14,9 @@ module.exports = {
     '<rootDir>/dist',
     '<rootDir>/build',
   ],
-  moduleNameMapper: {
-    '\\.(css|scss)$': 'identity-obj-proxy',
-  },
   transform: {
     '^.+\\.(j|t)sx?$': 'ts-jest',
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!@lyft/flyteidl)'],
   coverageDirectory: '.coverage',
   collectCoverageFrom: ['**/*.{ts,tsx}'],
   coveragePathIgnorePatterns: [
@@ -33,10 +29,10 @@ module.exports = {
     '<rootDir>/.eslintrc.js',
     '\\.config.js$',
   ],
-  coverageReporters: ['text'],
+  coverageReporters: ['text', 'lcov'],
   clearMocks: true,
-  setupFiles: ['<rootDir>/node_modules/regenerator-runtime/runtime'],
   setupTestFrameworkScriptFile: '<rootDir>/setupTests.js',
+
   snapshotSerializers: ['enzyme-to-json/serializer'],
   preset: 'ts-jest',
 };

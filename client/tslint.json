@@ -11,7 +11,10 @@
   },
   "rules": {
       "prettier": true,
-      "ordered-imports": true,
+      "ordered-imports": [true, {
+        "grouped-imports": true
+      }],
+      "import-spacing": true,
       // This rule is here for now because of https://github.com/palantir/tslint-react/issues/120
       "variable-name": [
           true,

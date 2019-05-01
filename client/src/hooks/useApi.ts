@@ -26,10 +26,8 @@ export default function useApi<T>(action: ((...args: any[]) => Promise<T>)) {
     try {
       setLoading(true);
       const res = await action(...args);
-      console.log(res);
       setResponse(res);
     } catch (e) {
-      console.log(e);
       setError(e);
     } finally {
       setLoading(false);

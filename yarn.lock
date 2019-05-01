@@ -2143,6 +2143,14 @@ create-error-class@^3.0.0:
   dependencies:
     capture-stack-trace "^1.0.0"
 
+cross-fetch@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.2.tgz#b7136491967031949c7f86b15903aef4fa3f1768"
+  integrity sha512-a4Z0EJ5Nck6QtMy9ZqloLfpvu2uMV3sBfMCR+CgSBCZc6z5KR4bfEiD3dkepH8iZgJMXQpTqf8FjMmvu/GMFkg==
+  dependencies:
+    node-fetch "2.3.0"
+    whatwg-fetch "3.0.0"
+
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -2489,6 +2497,19 @@ dotenv@^6.1.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
   integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
+
+dtsgenerator@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/dtsgenerator/-/dtsgenerator-2.0.6.tgz#776ca06757774686ce66a0ca6613e1457a7ce3e5"
+  integrity sha512-vLTiJpLfV6zrngD9CoVc8nrn/Veg/92acerp17iTDyqTkLLAjj4B2LmwhJPbIwq7nbTEFE3f2bm4kehuXvCPoQ==
+  dependencies:
+    commander "^2.19.0"
+    cross-fetch "^3.0.1"
+    debug "^4.1.1"
+    glob "^7.1.3"
+    js-yaml "^3.12.1"
+    mkdirp "^0.5.1"
+    tslib "^1.9.3"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -4860,6 +4881,14 @@ js-yaml@^3.10.0, js-yaml@^3.12.0, js-yaml@^3.9.0, js-yaml@^3.9.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^3.12.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -5805,7 +5834,7 @@ node-eta@^0.1.1:
   resolved "https://registry.yarnpkg.com/node-eta/-/node-eta-0.1.1.tgz#4066109b39371c761c72b7ebda9a9ea0a5de121f"
   integrity sha1-QGYQmzk3HHYccrfr2pqeoKXeEh8=
 
-node-fetch@^2.2.0:
+node-fetch@2.3.0, node-fetch@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
   integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
@@ -8511,6 +8540,11 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
+
+whatwg-fetch@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
+  integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
 
 whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.3.0"

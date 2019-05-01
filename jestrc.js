@@ -31,7 +31,7 @@ module.exports = {
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 
   testEnvironment: 'node',
-  roots: ['api-v1', 'server', 'db'],
+  roots: ['server', 'db'],
   setupFilesAfterEnv: ['./server/api-v1/setup/setupTests.js'],
   globalSetup: './server/api-v1/setup/globalSetup.js',
   globalTeardown: './server/api-v1/setup/globalTeardown.js',

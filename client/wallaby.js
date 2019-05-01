@@ -1,19 +1,17 @@
 module.exports = function(wallaby) {
   return {
     files: [
-      '**/*.ts?(x)',
+      'src/**/*.ts?(x)',
+      { pattern: '**/*.d.ts', ignore: true },
       'setupTests.js',
-      '**/*.hbs',
       '!**/__tests__/*.ts?(x)',
       '!**/node_modules/**/*',
-      '!devtools/**/*',
-      '!data.js',
       '!dist/**/*',
       '!coverage/**/*',
       '!scripts/**/*',
-      '!**/cypress/**/*',
-      'api/__mocks__/*.*',
       'tsconfig.json',
+      'jest.config.js',
+      'package.json',
     ],
     filesWithNoCoverageCalculated: [
       'db/**/*',
@@ -54,9 +52,9 @@ module.exports = function(wallaby) {
     },
 
     compilers: {
-      '**/*.js?(x)': wallaby.compilers.babel(),
+      // '**/*.js?(x)': wallaby.compilers.babel(),
 
-      '**/*.ts?(x)': wallaby.compilers.typeScript(),
+      '**/*.ts?(x)': wallaby.compilers.typeScript({ isolatedModules: true }),
     },
 
     testFramework: 'jest',
@@ -64,5 +62,10 @@ module.exports = function(wallaby) {
     debug: true,
 
     lowCoverageThreshold: 50,
+    setup() {
+      const jestConfig = require(`${wallaby.localProjectDir}/jest.config.js`); // eslint-disable-line
+      jestConfig.transform = {};
+      wallaby.testFramework.configure(jestConfig);
+    },
   };
 };

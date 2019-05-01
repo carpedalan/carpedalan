@@ -3,7 +3,7 @@
 exports[`<Login /> should match snapshot 1`] = `
 <styled.div>
   <styled.form
-    data-testid="submit"
+    data-test="submit"
     onSubmit={[Function]}
   >
     <Styled(styled.h1)
@@ -20,12 +20,11 @@ exports[`<Login /> should match snapshot 1`] = `
       />
     </styled.div>
     <styled.button
-      data-testid="submit-button"
+      data-test="submit-button"
       type="submit"
     >
       Login
     </styled.button>
-     
   </styled.form>
 </styled.div>
 `;

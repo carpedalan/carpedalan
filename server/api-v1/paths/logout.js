@@ -3,8 +3,8 @@ import { commonErrors } from '../refs/error';
 const status = 200;
 
 const logout = () => {
-  const post = (req, res) => {
-    req.session.destroy();
+  const post = async (req, res) => {
+    await req.session.destroy();
     res.status(status).send();
   };
   post.apiDoc = {

@@ -12,7 +12,6 @@ const App: React.FC<{ user: User }> = ({ user }) => {
   // const [userState, setUser] = useState(user);
   const [count, setCount] = useState(0);
   const { user: globalUser, setUser } = useUser();
-  const incrementCount = () => setUser(User.read);
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes.lite}>
@@ -23,7 +22,7 @@ const App: React.FC<{ user: User }> = ({ user }) => {
             <Route exact={true} path="/login" component={Login} />
             <Route exact={true} path="/" component={Slash} />
           </Switch>
-          <div data-test="something" onClick={incrementCount}>
+          <div data-test="something">
             ffuck yes{count}
             {globalUser}
           </div>
