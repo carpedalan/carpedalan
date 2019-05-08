@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import hotEntry from './hotEntry';
-
 import { User } from './User';
 
 // export default function App() {

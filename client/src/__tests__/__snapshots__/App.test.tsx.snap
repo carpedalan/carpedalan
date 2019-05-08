@@ -31,20 +31,17 @@ exports[`<App /> should match snapshot 1`] = `
       <Route
         component={[Function]}
         exact={true}
-        path="/login"
+        path="/request"
       />
       <Route
         component={[Function]}
         exact={true}
-        path="/"
+        path="/login"
+      />
+      <Route
+        component={[Function]}
       />
     </Switch>
-    <div
-      data-test="something"
-    >
-      ffuck yes
-      0
-    </div>
     <GlobalStyleComponent />
   </ThemeProvider>
 </BrowserRouter>

@@ -1,4 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+interface StyledProp {
+  [index: string]: string;
+}
 
 export const MAIN = 'main';
 export const TEXT = 'text';
@@ -9,13 +12,18 @@ export const BODY_FONT = 'bodyFont';
 export const TITLE_FONT = 'titleFont';
 export const DANGER_COLOR = 'dangerColor';
 export const NEUTRAL_COLOR = 'neutralColor';
-export const getThemeValue = value => ({ theme }) => theme[value];
-export const prop = value => props => props[value];
-export const propTrueFalse = (value, truthy, falsey) => props =>
-  props[value] ? truthy : falsey;
+export const getThemeValue = (value: string) => ({
+  theme,
+}: {
+  theme: StyledProp;
+}) => theme[value];
 
-export const propTrueFalseWithTheme = (value, truthy, falsey) => props =>
-  props[value] ? props.theme[truthy] : props.theme[falsey];
+export const prop = (value: string) => (props: StyledProp) => props[value];
+export const propTrueFalse = (
+  value: string,
+  truthy: string,
+  falsey: string,
+) => (props: StyledProp) => (props[value] ? truthy : falsey);
 
 export const GlobalStyleComponent = createGlobalStyle`
   

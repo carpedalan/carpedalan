@@ -1,6 +1,6 @@
 import { default as styled } from 'styled-components';
 
-import { prop } from '.';
+import { prop } from './utils';
 
 export enum FlexEnums {
   center = 'center',
@@ -17,8 +17,8 @@ const FlexContainer =
   FlexProps >
   `
   display: flex;
-  align-items: ${prop('alignItems')};
-  justify-content: ${prop('justifyContent')};
+  align-items: center;
+  justify-content: space-between;
 `;
 
 FlexContainer.defaultProps = {

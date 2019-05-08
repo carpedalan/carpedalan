@@ -1,10 +1,10 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import useApi from 'hooks/useApi';
 import useForm from 'hooks/useForm';
 import useUser, { User } from 'hooks/useUser';
 import * as React from 'react';
 import { Redirect } from 'react-router';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { default as styled } from 'styled-components';
 import Button from 'styles/Button';
 import Input from 'styles/Input';
@@ -22,16 +22,15 @@ const postLogin = async (
   reqBody: Paths.Login.RequestBody,
 ): Promise<Paths.Login.Responses.$200> => {
   try {
-    const response = await axios.post('/v1/login', reqBody);
-    const { data, status } = response;
+    const { data, status } = await axios.post('/v1/request', reqBody);
     return data as Paths.Login.Responses.$200;
   } catch (e) {
-    if (e.response) throw e.response.data as Components.Schemas.Error;
+    if (e.response) throw e.response.body as Components.Schemas.Error;
     throw e as Components.Schemas.Error;
   }
 };
 /**
- * Login route component. Includes form and api effects
+ * Request route component. Includes form and api effects
  */
 const Login: React.FC = () => {
   const { setUser, user } = useUser();
@@ -48,9 +47,14 @@ const Login: React.FC = () => {
     return e.target.value;
   };
 
-  const { useField, setValue, form } = useForm('myForm');
+  const { useField, setValue, form } = useForm('request');
 
-  const passwordInput = useField({ handleChange, field: 'password' });
+  const nameInput = useField({
+    handleChange,
+    field: 'name',
+    validate: v => (!v ? 'Is required' : false),
+  });
+  const emailInput = useField({ handleChange, field: 'email' });
   const { request, error, response, loading } = useApi(postLogin);
   useEffect(
     () => {
@@ -68,35 +72,43 @@ const Login: React.FC = () => {
     e.preventDefault();
     shouldShowError(true);
     request({
-      password: String(passwordInput.value),
+      name: String(nameInput.value),
+      email: String(emailInput.value),
     });
   };
 
   return (
     <InputWrapper>
-      <InputForm
-        data-test="submit"
-        data-testid="submit"
-        onSubmit={handleSubmit}
-      >
+      <InputForm data-test="submit" onSubmit={handleSubmit}>
         <StyledTitle center={true}>Login</StyledTitle>
         {user}
         <Input>
-          <input data-test="password" type="password" {...passwordInput} />
+          <label htmlFor="name">Name</label>
+          <input
+            data-test="name"
+            type="text"
+            name="name"
+            id="name"
+            {...nameInput}
+          />
+          {nameInput.error}
         </Input>
-        <Button
-          data-test="submit-button"
-          data-testid="submit-button"
-          type="submit"
-        >
+        <Input>
+          <label htmlFor="name">Email</label>
+          <input
+            data-test="email"
+            type="text"
+            name="email"
+            id="email"
+            {...emailInput}
+          />
+        </Input>
+        <Button data-test="submit-button" type="submit">
           Login
         </Button>
         {error && showError && !user ? (
-          <div data-test="error" data-testid="error">
-            {error.message}
-          </div>
+          <div data-test="error">{error.message}</div>
         ) : null}
-        <Link to="/request">Request access</Link>
         {user ? <Redirect to="/" /> : null}
       </InputForm>
     </InputWrapper>

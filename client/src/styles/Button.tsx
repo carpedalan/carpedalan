@@ -6,7 +6,7 @@ import {
   getThemeValue,
   NEUTRAL_COLOR,
   TITLE_FONT,
-} from '.';
+} from './utils';
 
 export enum ButtonType {
   danger,

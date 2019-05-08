@@ -13,7 +13,6 @@ import {
   TAG_ID,
   TAGS,
 } from '../../../../shared/constants';
-import log from '../../../../src/utils/log';
 
 const s3 = new AWS.S3();
 
@@ -37,7 +36,6 @@ const update = async (body, id) => {
         })
         .promise();
     } catch (e) {
-      log.error(e);
       throw new AWSError(e);
     }
   }
@@ -89,7 +87,6 @@ const update = async (body, id) => {
       };
     }
   } catch (e) {
-    log.error(e);
     if (e instanceof Error) throw e;
     throw new PGError(e.detail);
   }

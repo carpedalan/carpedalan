@@ -4,6 +4,7 @@ exports[`<Login /> should match snapshot 1`] = `
 <styled.div>
   <styled.form
     data-test="submit"
+    data-testid="submit"
     onSubmit={[Function]}
   >
     <Styled(styled.h1)
@@ -21,10 +22,16 @@ exports[`<Login /> should match snapshot 1`] = `
     </styled.div>
     <styled.button
       data-test="submit-button"
+      data-testid="submit-button"
       type="submit"
     >
       Login
     </styled.button>
+    <Link
+      to="/request"
+    >
+      Request access
+    </Link>
   </styled.form>
 </styled.div>
 `;

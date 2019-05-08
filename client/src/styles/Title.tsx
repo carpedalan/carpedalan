@@ -1,6 +1,6 @@
 import { css, default as styled } from 'styled-components';
 
-import { getThemeValue, TITLE_FONT } from '.';
+import { getThemeValue, TITLE_FONT } from './utils';
 
 enum Sizes {
   large,

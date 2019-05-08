@@ -16,24 +16,14 @@ module.exports = function(wallaby) {
     filesWithNoCoverageCalculated: [
       'db/**/*',
       '/*.*',
-      'src/**/*',
       'webpack.prod.js',
-      'jestrc.js',
+      'jestrc.config.json',
       'vandelay-js.js',
       'wallaby.js',
       'shared/constants.js',
       'webpack.config.js',
       'babel.config.js',
       'index.js',
-      'api-v1/**/index.js',
-      'api-v1/setup/**/*',
-      'server/config.js',
-      'server/middlewares.js',
-      'server/sw.js',
-      'server/constants.js',
-      'server/devMiddleware.config.js',
-      'server/db.js',
-      'imageResizer/**/*',
     ],
     tests: [
       '**/__tests__/*.ts?(x)',
@@ -55,6 +45,16 @@ module.exports = function(wallaby) {
       // '**/*.js?(x)': wallaby.compilers.babel(),
 
       '**/*.ts?(x)': wallaby.compilers.typeScript({ isolatedModules: true }),
+    },
+    preprocessors: {
+      /* eslint-disable */
+      '**/*.ts?(x)': file =>
+        require('@babel/core').transform(file.content, {
+          sourceMap: true,
+          filename: file.path,
+          presets: [require('babel-preset-jest')],
+        }),
+        /* eslint-enable */
     },
 
     testFramework: 'jest',

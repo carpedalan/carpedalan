@@ -1,6 +1,6 @@
 import { default as styled } from 'styled-components';
 
-import { BODY_FONT, getThemeValue } from '.';
+import { BODY_FONT, getThemeValue } from './utils';
 
 export default styled.div`
   margin: 1em 0;
