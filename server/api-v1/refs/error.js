@@ -24,6 +24,11 @@ const error = {
             type: 'string',
             example: 'openapi.validation.error',
           },
+          path: {
+            description: 'Path of field or property that is in question',
+            type: 'string',
+            example: 'name',
+          },
           message: {
             description: 'Human readable error message',
             type: 'string',

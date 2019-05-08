@@ -1,10 +1,12 @@
 module.exports = function(wallaby) {
   return {
     files: [
-      '**/*.ts?(x)',
+      '**/*.js?(x)',
       '**/*.hbs',
       '!**/__tests__/*.js?(x)',
       '!**/node_modules/**/*',
+      '!src/**/*',
+      '!client/**/*',
       '!devtools/**/*',
       '!data.js',
       '!dist/**/*',
@@ -36,7 +38,7 @@ module.exports = function(wallaby) {
       'imageResizer/**/*',
     ],
     tests: [
-      '**/__tests__/*.ts?(x)',
+      'server/**/__tests__/*.js?(x)',
       '!api/**/__tests__/*',
       '!node_modules/**/*',
       '!**/logout.js',
@@ -53,11 +55,6 @@ module.exports = function(wallaby) {
 
     compilers: {
       '**/*.js?(x)': wallaby.compilers.babel(),
-
-      '**/*.ts?(x)': wallaby.compilers.typeScript({
-        module: 'commonjs',
-        jsx: 'React',
-      }),
     },
 
     testFramework: 'jest',

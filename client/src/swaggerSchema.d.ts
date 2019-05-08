@@ -24,6 +24,12 @@ declare namespace Components {
                  */
                 type?: string;
                 /**
+                 * Path of field or property that is in question
+                 * example:
+                 * name
+                 */
+                path?: string;
+                /**
                  * Human readable error message
                  * example:
                  * request body should have x
@@ -963,6 +969,31 @@ declare namespace Paths {
                  */
                 count?: number;
             }[];
+            export type $400 = Components.Schemas.Error;
+            export type $401 = Components.Schemas.Error;
+            export type $403 = Components.Schemas.Error;
+            export type $404 = Components.Schemas.Error;
+            export type $422 = Components.Schemas.Error;
+            export type $500 = Components.Schemas.Error;
+        }
+    }
+    namespace Invitation {
+        /**
+         * Payload for invitation
+         */
+        export interface RequestBody {
+            /**
+             * Name
+             * example:
+             * Jay Inslee
+             */
+            name: string;
+            /**
+             * E-mail
+             */
+            email: string; // email
+        }
+        namespace Responses {
             export type $400 = Components.Schemas.Error;
             export type $401 = Components.Schemas.Error;
             export type $403 = Components.Schemas.Error;

@@ -7,32 +7,32 @@ import { Redirect } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import { default as styled } from 'styled-components';
 import Button from 'styles/Button';
+import DangerText from 'styles/DangerText';
 import Input from 'styles/Input';
 
 import { InputForm, InputWrapper, StyledButton, StyledTitle } from './styles';
 
 const { useEffect, useState } = React;
 /**
- * Post Login api caller
+ * Post Invitation api caller
  *
- * @param {Paths.Login.RequestBody} reqBody
- * @returns {Promise<Paths.Login.Responses.$200>}
+ * @param {Paths.Invitation.RequestBody} reqBody
+ * @returns {Promise<Void>}
  */
-const postLogin = async (
-  reqBody: Paths.Login.RequestBody,
-): Promise<Paths.Login.Responses.$200> => {
+const requestInvitation = async (
+  reqBody: Paths.Invitation.RequestBody,
+): Promise<void> => {
   try {
-    const { data, status } = await axios.post('/v1/request', reqBody);
-    return data as Paths.Login.Responses.$200;
+    const { data, status } = await axios.post('/v1/invitation', reqBody);
   } catch (e) {
-    if (e.response) throw e.response.body as Components.Schemas.Error;
+    if (e.response) throw e.response.data as Components.Schemas.Error;
     throw e as Components.Schemas.Error;
   }
 };
 /**
  * Request route component. Includes form and api effects
  */
-const Login: React.FC = () => {
+const Invitation: React.FC = () => {
   const { setUser, user } = useUser();
   const [showError, shouldShowError] = useState(true);
   /**
@@ -55,16 +55,12 @@ const Login: React.FC = () => {
     validate: v => (!v ? 'Is required' : false),
   });
   const emailInput = useField({ handleChange, field: 'email' });
-  const { request, error, response, loading } = useApi(postLogin);
-  useEffect(
-    () => {
-      setUser(response && response.user);
-    },
-    [response],
+  const { request, error, response, loading, retry } = useApi(
+    requestInvitation,
   );
 
   /**
-   * Submit hanlder. Calls the login API.
+   * Submit hanlder. Calls the Invitation API.
    *
    * @param {React.FormEvent<HTMLFormElement>} e
    */
@@ -80,7 +76,7 @@ const Login: React.FC = () => {
   return (
     <InputWrapper>
       <InputForm data-test="submit" onSubmit={handleSubmit}>
-        <StyledTitle center={true}>Login</StyledTitle>
+        <StyledTitle center={true}>Request</StyledTitle>
         {user}
         <Input>
           <label htmlFor="name">Name</label>
@@ -103,16 +99,23 @@ const Login: React.FC = () => {
             {...emailInput}
           />
         </Input>
-        <Button data-test="submit-button" type="submit">
-          Login
+        <Button
+          data-test="submit-button"
+          data-testid="submit-button"
+          type="submit"
+        >
+          Request invite
         </Button>
-        {error && showError && !user ? (
-          <div data-test="error">{error.message}</div>
-        ) : null}
-        {user ? <Redirect to="/" /> : null}
+        {error && showError && !user && error.errors
+          ? error.errors.map(({ message, path }) => (
+              <DangerText key="path" data-test="error" data-testid="error">
+                {path}: {message}
+              </DangerText>
+            ))
+          : null}
       </InputForm>
     </InputWrapper>
   );
 };
 
-export default Login;
+export default Invitation;

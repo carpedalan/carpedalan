@@ -65,7 +65,7 @@
     "prettier": "^1.16.4",
     "prettier-eslint": "^8.8.2",
     "react-test-renderer": "16.8.0",
-    "supertest": "^3.4.2",
+    "supertest": "^4.0.2",
     "webpack-dev-middleware": "^3.5.1",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-stylish": "^0.1.8"
@@ -102,7 +102,7 @@
     "prop-types": "^15.6.2",
     "qs": "^6.6.0",
     "request": "^2.88.0",
-    "superagent": "^4.1.0",
+    "superagent": "^5.0.5",
     "swagger-ui-express": "^4.0.2",
     "uuid": "^3.3.2",
     "winston": "^3.2.1",

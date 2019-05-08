@@ -11,6 +11,7 @@ import Tags from './paths/tags';
 import TagPosts from './paths/tags/{tagId}/posts';
 import Login from './paths/login';
 import Logout from './paths/logout';
+import Invitation from './paths/invitation';
 import User from './paths/user';
 import UploadUrl from './paths/upload';
 import v1ApiDoc from './api-doc';
@@ -58,6 +59,10 @@ export const paths = [
   {
     path: '/upload/',
     module: UploadUrl,
+  },
+  {
+    path: '/invitation/',
+    module: Invitation,
   },
 ];
 
