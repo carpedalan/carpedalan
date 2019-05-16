@@ -25,6 +25,7 @@ module.exports = {
     '<rootDir>/node_modules',
     '<rootDir>/dist',
     '<rootDir>/build',
+    '<rootDir>/src/Routes.tsx',
     '<rootDir>/src/tsd',
     '<rootDir>/.eslintrc.js',
     '\\.config.js$',

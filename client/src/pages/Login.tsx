@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import useApi from 'hooks/useApi';
 import useForm from 'hooks/useForm';
-import useUser, { User } from 'hooks/useUser';
+import useUser from 'hooks/useUser';
+import { IUserContext, UserContext } from 'providers/User';
 import * as React from 'react';
 import { Redirect } from 'react-router';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -11,7 +12,7 @@ import Input from 'styles/Input';
 
 import { InputForm, InputWrapper, StyledButton, StyledTitle } from './styles';
 
-const { useEffect, useState } = React;
+const { useEffect, useState, useContext } = React;
 /**
  * Post Login api caller
  *
@@ -33,7 +34,7 @@ const postLogin = async (
 /**
  * Login route component. Includes form and api effects
  */
-const Login: React.FC = () => {
+function login({ history }: any) {
   const { setUser, user } = useUser();
   const [showError, shouldShowError] = useState(true);
   /**
@@ -51,10 +52,14 @@ const Login: React.FC = () => {
   const { useField, setValue, form } = useForm('myForm');
 
   const passwordInput = useField({ handleChange, field: 'password' });
+
   const { request, error, response, loading } = useApi(postLogin);
+
   useEffect(
     () => {
-      setUser(response && response.user);
+      if (response) {
+        setUser(response && response.user);
+      }
     },
     [response],
   );
@@ -97,10 +102,9 @@ const Login: React.FC = () => {
           </div>
         ) : null}
         <Link to="/request">Request access</Link>
-        {user ? <Redirect to="/" /> : null}
       </InputForm>
     </InputWrapper>
   );
-};
+}
 
-export default Login;
+export default login;

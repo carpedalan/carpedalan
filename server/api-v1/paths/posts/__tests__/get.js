@@ -47,7 +47,6 @@ describe('GET /posts', () => {
 
   it('it should return the right order', async () => {
     const response = await readUserAgent.get(`/v1/posts?page=1`);
-
     validate(200, response);
     if (!response.body.data[0].timestamp) return true;
     expect(response.body.data[0].timestamp).toBeGreaterThan(

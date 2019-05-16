@@ -31,14 +31,9 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const [count, setCount] = useState(0);
   const incrementCount = (): void => setCount(count + 1);
   const { setUser, user } = useUser();
-  const something = () => {
-    setUser('read');
-  };
   return (
-    <div onClick={incrementCount}>
-      <InputForm onClick={something} width={200}>
-        {user}
-      </InputForm>
+    <div data-testid="home" onClick={incrementCount}>
+      <InputForm width={200}>{user}</InputForm>
       {history.location.pathname}
       {count}
     </div>

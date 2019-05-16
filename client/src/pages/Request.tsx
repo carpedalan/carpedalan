@@ -1,18 +1,15 @@
 import axios from 'axios';
 import useApi from 'hooks/useApi';
 import useForm from 'hooks/useForm';
-import useUser, { User } from 'hooks/useUser';
+import useUser from 'hooks/useUser';
 import * as React from 'react';
-import { Redirect } from 'react-router';
-import { RouteComponentProps } from 'react-router-dom';
-import { default as styled } from 'styled-components';
 import Button from 'styles/Button';
 import DangerText from 'styles/DangerText';
 import Input from 'styles/Input';
 
 import { InputForm, InputWrapper, StyledButton, StyledTitle } from './styles';
 
-const { useEffect, useState } = React;
+const { useState } = React;
 /**
  * Post Invitation api caller
  *
@@ -72,7 +69,6 @@ const Invitation: React.FC = () => {
       email: String(emailInput.value),
     });
   };
-
   return (
     <InputWrapper>
       <InputForm data-test="submit" onSubmit={handleSubmit}>

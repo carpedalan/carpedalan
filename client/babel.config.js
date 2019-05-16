@@ -1,3 +1,10 @@
 module.exports = {
-  plugins: ['react-hot-loader/babel'],
+  env: {
+    development: {
+      plugins: ['react-hot-loader/babel'],
+    },
+    test: {
+      plugins: [],
+    },
+  },
 };

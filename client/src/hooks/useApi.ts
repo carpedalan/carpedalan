@@ -30,11 +30,11 @@ export default function useApi<T>(action: ((...args: any[]) => Promise<T>)) {
       retry.current = trial;
       setLoading(true);
       const res = await action(...args);
+      setLoading(false);
       setResponse(res);
     } catch (e) {
-      setError(e);
-    } finally {
       setLoading(false);
+      setError(e);
     }
   }
   return { loading, request, error, response, retry: retry.current };

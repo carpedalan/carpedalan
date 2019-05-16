@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosStatic } from 'axios';
 import { shallow } from 'enzyme';
+import { UserContext, UserProvider } from 'providers/User';
 import * as React from 'react';
 import { MemoryRouter, Redirect, Route } from 'react-router';
 import { BrowserRouter, Link } from 'react-router-dom';
@@ -93,18 +94,22 @@ describe('<Login />', () => {
       } as AxiosResponse),
     );
     const { getByTestId } = render(
-      <MemoryRouter>
-        <Link data-testid="login-link" to="login">
-          Login
-        </Link>
-        <Route exact={true} path="/" component={RedirectComponent} />
-        <Route path="/login" component={Login} />
-      </MemoryRouter>,
+      <UserProvider>
+        <MemoryRouter>
+          <Link data-testid="login-link" to="login">
+            Login
+          </Link>
+          <Route path="/login" component={Login} />
+          <UserContext.Consumer>
+            {context => (context.user ? <div data-testid="home" /> : null)}
+          </UserContext.Consumer>
+        </MemoryRouter>
+      </UserProvider>,
     );
     fireEvent.click(getByTestId('login-link'));
     const errorText = await waitForElement(() => getByTestId('submit'));
 
     fireEvent.click(getByTestId('submit-button'));
-    const redirected = await waitForElement(() => getByTestId('redirected'));
+    const redirected = await waitForElement(() => getByTestId('home'));
   });
 });
