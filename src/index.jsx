@@ -79,7 +79,6 @@ function Root({ user, defaultTheme, status, requests, api }) {
                           handleChangeTheme={handleChangeTheme}
                           toggleMenu={toggleMenu}
                         />
-
                         <Switch>
                           <Route exact path="/login" component={Login} />
                           {isAdmin ? (

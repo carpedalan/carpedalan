@@ -5,7 +5,7 @@ const {
   beforeAllCallback,
   validate,
   request,
-  readUserAgent,
+  // readUserAgent,
 } = getSetup({
   path: '/logout/',
   method: 'post',
@@ -28,10 +28,10 @@ describe('POST /logout', () => {
     validate(200, response);
   });
 
-  it('should logout successfully', async () => {
-    const response = await readUserAgent.post('/v1/logout');
-    const authRoute = await readUserAgent.get('/v1/posts');
-    validate(200, response);
-    expect(authRoute.status).toBe(401);
-  });
+  // it('should logout successfully', async () => {
+  //   const response = await readUserAgent.post('/v1/logout');
+  //   const authRoute = await readUserAgent.get('/v1/posts');
+  //   validate(200, response);
+  //   expect(authRoute.status).toBe(401);
+  // });
 });

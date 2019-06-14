@@ -54,11 +54,6 @@ describe('Webapp Routes', () => {
     expect(status).toBe(200);
   });
 
-  it('it should allow admin if logged in as write', async () => {
-    const { status } = await writeUserAgent.get('/admin/');
-    expect(status).toBe(200);
-  });
-
   it('should serve a robots.txt', async () => {
     const { status, text } = await request.get('/robots.txt');
     expect(status).toBe(200);

@@ -27,7 +27,7 @@ export default function Baby({ history }) {
     <Dialog onClose={() => history.push('/')} type="copy">
       {/* eslint-disable react/jsx-one-expression-per-line */}
       <FancyTitle center>Maryn Carla Dalan</FancyTitle>
-      <p>We had a baby!</p>
+      <p>things</p>
     </Dialog>
   );
 }
