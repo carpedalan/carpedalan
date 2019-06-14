@@ -42,6 +42,22 @@ export default (app, openApiDoc) => {
     });
   });
 
+  app.get('/baby', (req, res) => {
+    res.render('index', {
+      layout: false,
+      openApiDoc: JSON.stringify(openApiDoc),
+      session: JSON.stringify(req.session),
+      isProd,
+      clientAssets,
+      assetDomain,
+      meta: JSON.stringify({
+        cdn: cdnDomain,
+        ci,
+        nodeEnv,
+      }),
+    });
+  });
+
   app.get('/admin/*', (req, res) => {
     if (req.session.user !== 'write') {
       res.redirect(301, '/');

@@ -3,9 +3,9 @@ version: '2.3'
 services:
   alb:
     container_name: c_alb
-    depends_on:
-      carpe: 
-        condition: service_healthy
+    # depends_on:
+    #   carpapp: 
+    #     condition: service_healthy
     image: ekino/nginx-brotli:latest-1.12.2-bfd2885
     restart: always
     volumes: 
@@ -16,8 +16,8 @@ services:
       - 80:80
       - 443:443
 
-  carpe:
-    container_name: carpe
+  carpapp:
+    container_name: carpapp
     depends_on:
       pg:
         condition: service_healthy

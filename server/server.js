@@ -71,6 +71,7 @@ export const setup = () => {
     layoutsDir: path.resolve(__dirname),
     partialsDir: path.resolve(__dirname),
   };
+  app.enable('view cache');
   app.engine('hbs', expbhs(viewConfig));
   app.set('view engine', 'hbs');
   app.set('views', viewConfig.layoutsDir);

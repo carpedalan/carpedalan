@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { number, shape } from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import request from 'superagent';
 
@@ -16,6 +16,8 @@ import { User } from '..';
 import { BRAND_COLOR, getThemeValue, prop, MAIN } from '../styles';
 import DangerText from '../styles/DangerText';
 import Title from '../styles/Title';
+
+import Baby from './Baby';
 
 const emailRe = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; // eslint-disable-line
 
@@ -90,6 +92,7 @@ export default function Login({ location: { pathname }, status }) {
   const redirect = pathname === '/login' ? '/' : pathname;
   return (
     <>
+      <Route exact path="/baby" component={Baby} />
       <InputWrapper>
         <InputForm>
           {requestAccess ? (
