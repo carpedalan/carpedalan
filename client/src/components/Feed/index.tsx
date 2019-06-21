@@ -107,19 +107,21 @@ const Feed = ({
    */
   function getItemSize(containerWidth: number): (index: number) => number {
     return function calculateSize(index: number) {
+      const post = itemsWithTitle[index];
       let height = 1;
       let width = 1;
-      if (itemsWithTitle[index].imageHeight) {
-        height = Number(itemsWithTitle[index].imageHeight);
+      if (post.imageHeight) {
+        height = Number(post.imageHeight);
       }
-      if (itemsWithTitle[index].imageWidth) {
-        width = Number(itemsWithTitle[index].imageWidth);
+      if (post.imageWidth) {
+        width = Number(post.imageWidth);
       }
 
       const ratio = height / width;
-      const size = ratio * Math.min(containerWidth, 620);
-      log('size', size);
-      return size;
+      let size = ratio * Math.min(containerWidth, 620);
+      if (post.description) size += 34;
+      if (post.tags && post.tags.length) size += 34;
+      return size + 58;
     };
   }
 

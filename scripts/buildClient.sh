@@ -10,6 +10,7 @@ if [ "$CIRCLE_BRANCH" == "master" ]; then
     export ASSETS_BUCKET=${PROD_ASSETS_BUCKET}
     export ECR_REPOSITORY=${PROD_ECR_REPOSITORY}
     export CYPRESS_REPOSITORY=${PROD_CYPRESS_REPOSITORY}
+    export ASSET_CDN_DOMAIN=cdn.carpedalan.com
 else
     export AWS_ACCESS_KEY_ID=${STAGE_AWS_ACCESS_KEY_ID}
     export AWS_SECRET_ACCESS_KEY=${STAGE_AWS_SECRET_ACCESS_KEY}
@@ -21,12 +22,18 @@ else
     export ASSETS_BUCKET=${STAGE_ASSETS_BUCKET}
     export ECR_REPOSITORY=${STAGE_ECR_REPOSITORY}
     export CYPRESS_REPOSITORY=${STAGE_CYPRESS_REPOSITORY}
+    export ASSET_CDN_DOMAIN=cdn.carpe.dalan.dev
 fi
 echo 'All set!'
-echo ${PIPELINE_BUCKET} 
-aws s3 cp "s3://${PIPELINE_BUCKET}/.env" .
-aws s3 cp "s3://${PIPELINE_BUCKET}/server/cfkeys" ./server/cfkeys/ --recursive 
-aws s3 cp "s3://${PIPELINE_BUCKET}/goodDataWithEtagAndKey.json" .
-aws s3 cp "s3://${ASSETS_BUCKET}/manifest-${CIRCLE_SHA1}.json" ./server/manifest.json
 echo 'keys'
-ls ./server/cfkeys/ -al
+docker build \
+--build-arg AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+--build-arg AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+--build-arg S3_ASSETS_BUCKET=${ASSETS_BUCKET} \
+--build-arg CIRCLE_SHA1=${CIRCLE_SHA1} \
+--build-arg ASSET_CDN_DOMAIN=${ASSET_CDN_DOMAIN} \
+-t build:client \
+-f client/Dockerfile.prod \
+client
+
+docker run -it build:client

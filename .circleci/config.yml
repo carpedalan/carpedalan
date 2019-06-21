@@ -70,10 +70,15 @@ jobs:
             pip install \
               docker-compose==1.22.0 \
               awscli==1.15.82
+              
 
       - run: 
           name: Set env
           command: ./scripts/setenv.sh
+
+      - run: 
+          name: Build Client
+          command: ./scripts/buildClient.sh
 
       - run: 
           name: Get config

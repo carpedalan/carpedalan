@@ -1,7 +1,7 @@
 import Menu from 'components/Menu';
 import Sidebar from 'components/Sidebar';
-import useUser from 'hooks/useUser';
 import * as React from 'react';
+import useUser from '../../hooks/useUser';
 
 const { useState } = React;
 
@@ -21,13 +21,7 @@ const SidebarAndMenu: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      <Menu
-        data-test="menu"
-        size="small"
-        // @ts-ignore wtf
-        onClick={toggleMenu}
-        type="button"
-      >
+      <Menu data-test="menu" onClick={toggleMenu} type="button" side="left">
         Menu
       </Menu>
       <Sidebar

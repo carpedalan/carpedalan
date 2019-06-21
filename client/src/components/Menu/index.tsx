@@ -1,8 +1,15 @@
+import { HTMLAttributes } from 'enzyme';
 import { default as styled } from 'styled-components';
 import Title from 'styles/Title';
-import { prop } from 'styles/utils';
+import { BRAND_COLOR, prop } from 'styles/utils';
 
-const Menu = styled.button`
+interface IMenu extends HTMLAttributes {
+  side: string;
+}
+const Menu =
+  styled.button <
+  IMenu >
+  `
   background: none;
   color: inherit;
   border: none;

@@ -119,7 +119,14 @@ const usePosts = (): UsePost => {
    * @returns {Promise<Paths.GetPosts.Responses.$200>}
    */
   const getPosts = async ({
-    fields = ['key', 'imageHeight', 'imageWidth', 'status', 'orientation'],
+    fields = [
+      'key',
+      'imageHeight',
+      'imageWidth',
+      'status',
+      'orientation',
+      'description',
+    ],
     order = 'desc',
     page = 1,
     isPending = false,

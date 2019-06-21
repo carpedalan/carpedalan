@@ -1,13 +1,12 @@
-FROM node:11.13-alpine AS base
+FROM node:12-alpine AS base
 WORKDIR /app
 COPY yarn.lock .
 
 COPY package.json .
-RUN apk add curl=7.64.0-r1 git=2.20.1-r0
+RUN apk add curl=7.64.0-r2 git=2.20.1-r0
 RUN yarn --production --ignore-optional
 COPY server/ ./server
 COPY shared/ ./shared
-COPY babel.config.js .
 COPY .env.example .
 COPY index.js . 
 COPY scripts/ ./scripts

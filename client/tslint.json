@@ -5,20 +5,14 @@
       "tslint-config-prettier"
   ],
   "rulesDirectory": ["tslint-plugin-prettier"],
-  // This section is here to keep tslint happy because we have allowJs: true in tsconfig.json
   "jsRules": {
     "no-empty": true
   },
   "rules": {
       "prettier": true,
-      "ordered-imports": [true, {
-        "grouped-imports": true
-      }],
       "import-spacing": true,
       "no-any": true,
-      "no-unused-variable": true,
       "no-boolean-literal-compare": false,
-      // This rule is here for now because of https://github.com/palantir/tslint-react/issues/120
       "variable-name": [
           true,
           "ban-keywords",

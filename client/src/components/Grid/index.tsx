@@ -16,7 +16,7 @@ const InnerWrapper = styled.main`
   height: 100%;
 `;
 
-const { useEffect, useRef } = React;
+const { useRef, useEffect } = React;
 const { VariableSizeList: List } = ReactWindow;
 
 const Wrapper = styled.div`
@@ -49,7 +49,6 @@ const Grid = ({
     () => {
       if (wrapperRef.current !== null) {
         const { width } = wrapperRef.current.getBoundingClientRect();
-        log('updating', width);
         setRefWidth(width);
       }
     },

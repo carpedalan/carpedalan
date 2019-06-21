@@ -24,6 +24,22 @@
       "sourceMap": true,
       "strict": true,
       "target": "es6",
-      "types": ["node", "webpack-env", "jest"]
+      "types": ["node", "webpack-env", "jest"],
+      "plugins": [
+        {
+          "name": "typescript-tslint-plugin",
+          "alwaysShowRuleFailuresAsWarnings": false,
+          "ignoreDefinitionFiles": true,
+          "configFile": "./tslint.json",
+          "suppressWhileTypeErrorsPresent": false
+        },
+        {
+          "transform": "typescript-plugin-styled-components",
+          "type": "config",
+
+          // other typescript-plugin-styled-components options can be added here
+          "minify": true,
+      }        
+      ]
   }
 }

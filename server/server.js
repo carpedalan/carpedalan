@@ -1,20 +1,20 @@
 import path from 'path';
 
+import bodyParser from 'body-parser';
+import connectPgSimple from 'connect-pg-simple';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import winston from 'winston';
-import expressWinston from 'express-winston';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
 import expbhs from 'express-handlebars';
+import session from 'express-session';
+import expressWinston from 'express-winston';
 import pg from 'pg';
-import connectPgSimple from 'connect-pg-simple';
 import swaggerUi from 'swagger-ui-express';
+import winston from 'winston';
 
 import initialize from './api-v1/initialize';
-import router from './routes';
 import {
+  assetDomain,
   assets,
   cdnDomain,
   ci,
@@ -28,13 +28,13 @@ import {
   port,
   sessionSecret,
   ssl,
-  assetDomain,
 } from './config';
+import router from './routes';
 
 const app = express();
 let clientAssets = false;
 if (isProd) {
-  const manifest = require('../dist/manifest.json'); // eslint-disable-line global-require,import/no-unresolved
+  const manifest = require('./manifest.json'); // eslint-disable-line global-require,import/no-unresolved
   clientAssets = assets.map(asset => manifest[asset]);
 }
 

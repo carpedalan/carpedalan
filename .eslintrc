@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": ["airbnb", "prettier", "plugin:jest/recommended"],
-  "plugins": ["prettier", "react-hooks", "jest"],
+  "plugins": ["prettier", "jest"],
   "env": {
     "browser": true,
     "node": true,
@@ -16,9 +16,6 @@
     "func-names": ["error", "never"],
     "prettier/prettier": ["error"],
     "import/order": ["error", {"groups": ["builtin", "external", "parent", "sibling", "index"], "newlines-between" : "always"}],
-    "react-hooks/rules-of-hooks": "error",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
     "no-console": "error"
   },
   "overrides": [
@@ -26,11 +23,7 @@
       "files": "**/__tests__/*",
       "rules": {
         "no-unused-expressions": "off",
-        "no-undef": "off",
-        "react/jsx-filename-extension": "off",
-        "jsx-a11y/anchor-is-valid": "off",
-        "react/forbid-foreign-prop-types": "off"
-  
+        "no-undef": "off"
       }
     }, {
       "files": "cypress/**/*",

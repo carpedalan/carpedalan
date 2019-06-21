@@ -1,13 +1,11 @@
 import axios from 'axios';
-import Menu from 'components/Menu';
-import Sidebar from 'components/Sidebar';
 import debug from 'debug';
 import useUser from 'hooks/useUser';
 import { DataProvider } from 'providers/Data';
 import RouterContext from 'providers/RouterContext';
 import { UserProvider } from 'providers/User';
 import * as React from 'react';
-import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Routes from 'Routes';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyleComponent, themes } from 'styles/utils';

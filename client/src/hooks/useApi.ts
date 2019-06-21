@@ -1,7 +1,4 @@
-import get from 'lodash/get';
-import { stringify } from 'qs';
-import { useContext, useRef, useState } from 'react';
-import * as req from 'superagent';
+import { useRef, useState } from 'react';
 
 /**
  * Custom hook to manage error and loading states throughout an APIs

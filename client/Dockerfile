@@ -1,7 +1,7 @@
 FROM node:11.13-alpine AS base
 WORKDIR /app
 COPY yarn.lock .
-
+RUN apk add git=2.20.1-r0
 COPY package.json .
 RUN yarn
 COPY src ./src

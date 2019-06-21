@@ -6,7 +6,7 @@ import { assets, isProd, cdnDomain, domain, cfKey } from './config';
 
 let clientAssets = false;
 if (isProd) {
-  const manifest = require('../dist/manifest.json'); // eslint-disable-line global-require,import/no-unresolved
+  const manifest = require('./manifest.json'); // eslint-disable-line global-require,import/no-unresolved
   clientAssets = assets.map(asset => manifest[asset]);
 }
 

@@ -1,7 +1,16 @@
+import format from 'date-fns/format';
+import fromUnixTime from 'date-fns/fromUnixTime';
 import { createGlobalStyle } from 'styled-components';
+
 interface StyledProp {
   [index: string]: string;
 }
+
+export const formatDate = (timestamp: number): string =>
+  format(fromUnixTime(timestamp), 'MMM d YYYY', {
+    awareOfUnicodeTokens: true,
+    /* tslint:disable-next-line */
+  } as any); 
 
 export const MAIN = 'main';
 export const TEXT = 'text';
@@ -18,7 +27,11 @@ export const getThemeValue = (value: string) => ({
   theme: StyledProp;
 }) => theme[value];
 
-export const prop = (value: string) => (props: StyledProp) => props[value];
+// tslint:disable-next-line
+export function prop<T>(value: keyof T): (props: T) => any {
+  return props => props[value];
+}
+
 export const propTrueFalse = (
   value: string,
   truthy: string,
