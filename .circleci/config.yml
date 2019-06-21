@@ -15,9 +15,9 @@ workflows:
       # - unit_test:
       #     requires:
       #       - dependencies
-      # - lint:
-      #     requires:
-      #       - dependencies
+      - lint:
+          requires:
+            - dependencies
       - integration:
           requires:
             - dependencies
@@ -27,7 +27,8 @@ workflows:
       - deploy: 
           requires: 
             # - e2e
-            # - lint
+            - lint
+            - build
             - integration
             # - unit_test
 
@@ -44,9 +45,16 @@ jobs:
           name: Install node dependencies
           command: yarn
 
+      - run: 
+          name: Install client dependencies
+          command: |
+            cd client
+            yarn
+
       - save_cache:
           paths:
             - node_modules
+            - client/node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
 
@@ -102,6 +110,13 @@ jobs:
       - run:
           name: "ESLint"
           command: yarn lint --format junit -o reports/junit/js-lint-results.xml
+
+      - run:
+          name: "TSLint"
+          command: |
+            yarn lint --format junit -o reports/junit/js-lint-results.xml
+            cd client
+            yarn lint
 
       - store_test_results:
           path: reports/junit

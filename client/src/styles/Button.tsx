@@ -14,6 +14,7 @@ export enum ButtonType {
 }
 
 interface ButtonProps {
+  /* tslint:disable-next-line no-any */
   theme: any;
   variant?: ButtonType;
 }

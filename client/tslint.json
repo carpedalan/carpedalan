@@ -19,5 +19,11 @@
           "check-format",
           "allow-pascal-case"
       ]
-  }
+  },
+  "linterOptions": {
+    "exclude": [
+        "docs/**/*",
+        "**/__snapshots__/**/*"
+    ]
+}
 }
