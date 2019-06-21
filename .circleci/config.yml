@@ -12,9 +12,9 @@ workflows:
     jobs:
       - build
       - dependencies
-      # - unit_test:
-      #     requires:
-      #       - dependencies
+      - unit_test:
+          requires:
+            - dependencies
       - lint:
           requires:
             - dependencies
@@ -30,7 +30,7 @@ workflows:
             - lint
             - build
             - integration
-            # - unit_test
+            - unit_test
 
 
 jobs:
@@ -139,7 +139,7 @@ jobs:
           name: "Jest FE"
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
-          command: yarn test --ci --testResultsProcessor="jest-junit" --coverage --verbose
+          command: cd client && yarn test --ci --coverage --verbose
 
       - store_test_results:
           path: reports/

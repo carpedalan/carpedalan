@@ -4,7 +4,7 @@
   "description": "Carpe Dalan",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src api-v1 db imageResizer scripts server shared  --ext .js,.jsx",
+    "lint": "eslint db imageResizer scripts server shared  --ext .js,.jsx",
     "integration": "NODE_ENV=test PG_HOST=localhost PG_PORT=5555 jest -c jestrc.js --runInBand",
     "integration:ci": "PG_HOST=localhost NODE_ENV=ci jest -c jestrc.js --runInBand --verbose",
     "build": "BABEL_ENV=production NODE_ENV=production yarn webpack --mode production --config webpack.prod.js",

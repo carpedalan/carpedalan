@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const reduce = require('lodash/reduce');
 const aws = require('aws-sdk');
-const request = require('superagent');
+const request = require('superagent'); // eslint-disable-line import/no-extraneous-dependencies
 const uniq = require('lodash/uniq');
 
 const data = require('../data'); // eslint-disable-line import/no-unresolved

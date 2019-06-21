@@ -70,12 +70,12 @@ describe('POST /invitation', () => {
     expect(mockSES.mock.calls[0]).toMatchSnapshot();
   });
 
-  it.skip('should forward the error', async () => {
-    mockPromise.mockImplementation = () => Promise.reject();
-    const response = await request
-      .post('/v1/invitation/')
-      .set('Content-Type', 'application/json')
-      .send({ name: 'farts', email: 'leif@fo.co' });
-    expect(response.body).toBe('something');
-  });
+  // it.skip('should forward the error', async () => {
+  //   mockPromise.mockImplementation = () => Promise.reject();
+  //   const response = await request
+  //     .post('/v1/invitation/')
+  //     .set('Content-Type', 'application/json')
+  //     .send({ name: 'farts', email: 'leif@fo.co' });
+  //   expect(response.body).toBe('something');
+  // });
 });
