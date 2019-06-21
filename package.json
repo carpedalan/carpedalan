@@ -31,11 +31,6 @@
     "*.{js,jsx}": [
       "eslint --fix",
       "git add"
-    ],
-    "*.{ts,tsx}": [
-      "cd client",
-      "yarn lint",
-      "git add"
     ]
   },
   "devDependencies": {
