@@ -4,7 +4,7 @@ services:
   alb:
     container_name: alb
     depends_on:
-      api: 
+      carpe_api: 
         condition: service_healthy
     image: ekino/nginx-brotli:latest-1.12.2-bfd2885
     restart: always
@@ -15,7 +15,7 @@ services:
     ports:
       - 443:443
 
-  api:
+  carpe_api:
     container_name: c_api
     depends_on:
       pg:
