@@ -64,7 +64,8 @@
     "prettier": "^1.16.4",
     "prettier-eslint": "^8.8.2",
     "superagent": "^5.0.5",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "tslint-config-prettier": "^1.18.0"
   },
   "dependencies": {
     "@sentry/node": "^4.5.3",
