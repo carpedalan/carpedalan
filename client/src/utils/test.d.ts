@@ -9,3 +9,4 @@ declare namespace jest {
     toBeInTheDOM: () => void;
   }
 }
+declare module 'react-testing-library';
