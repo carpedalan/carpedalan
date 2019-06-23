@@ -12,10 +12,7 @@ interface FlexProps {
   alignItems?: FlexEnums;
 }
 
-const FlexContainer =
-  styled.div <
-  FlexProps >
-  `
+const FlexContainer = styled.div<FlexProps>`
   display: flex;
   align-items: center;
   justify-content: ${props => props.justifyContent};

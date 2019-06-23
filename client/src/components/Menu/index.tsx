@@ -6,10 +6,7 @@ import { BRAND_COLOR, prop } from 'styles/utils';
 interface IMenu extends HTMLAttributes {
   side: string;
 }
-const Menu =
-  styled.button <
-  IMenu >
-  `
+const Menu = styled.button<IMenu>`
   background: none;
   color: inherit;
   border: none;

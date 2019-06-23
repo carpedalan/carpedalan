@@ -45,15 +45,12 @@ const Grid = ({
 
   const postsPerRow = Math.floor(refWidth / 150);
 
-  useEffect(
-    () => {
-      if (wrapperRef.current !== null) {
-        const { width } = wrapperRef.current.getBoundingClientRect();
-        setRefWidth(width);
-      }
-    },
-    [wrapperRef.current, width],
-  );
+  useEffect(() => {
+    if (wrapperRef.current !== null) {
+      const { width } = wrapperRef.current.getBoundingClientRect();
+      setRefWidth(width);
+    }
+  }, [wrapperRef.current, width]);
 
   /**
    * Triggered if isItemLoaded returns false
@@ -79,7 +76,7 @@ const Grid = ({
         {[...Array(postsPerRow).fill(0)].map((num, arrayIndex) => (
           <Picture
             key={arrayIndex}
-            width={`${refWidth / postsPerRow * 100}%`}
+            width={`${(refWidth / postsPerRow) * 100}%`}
             ratio={1}
             post={itemsWithTitle[index * postsPerRow + arrayIndex]}
             shouldShowImage={true}

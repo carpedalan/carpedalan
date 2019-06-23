@@ -12,9 +12,7 @@ interface TitleProps {
   center?: boolean;
 }
 
-export default styled.h1 <
-  TitleProps >
-  `
+export default styled.h1<TitleProps>`
   font-family: ${getThemeValue(TITLE_FONT)};
   margin: 2em 0;
   font-size: ${({ size }) => {

@@ -19,9 +19,7 @@ interface ButtonProps {
   variant?: ButtonType;
 }
 
-export default styled.button <
-  ButtonProps >
-  `
+export default styled.button<ButtonProps>`
   background: ${({ theme, variant }) => {
     switch (variant) {
       case ButtonType.danger:

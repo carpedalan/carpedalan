@@ -12,10 +12,7 @@ interface MenuProps {
   side: Side;
 }
 
-const Menu =
-  styled(Title) <
-  MenuProps >
-  `
+const Menu = styled(Title)<MenuProps>`
   background: none;
   color: inherit;
   border: none;

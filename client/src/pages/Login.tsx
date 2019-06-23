@@ -57,14 +57,11 @@ const Login: React.FC<{}> = (): React.ReactElement => {
 
   const { request, error, response, loading } = useApi(postLogin);
 
-  useEffect(
-    () => {
-      if (response) {
-        setUser(response && response.user);
-      }
-    },
-    [response],
-  );
+  useEffect(() => {
+    if (response) {
+      setUser(response && response.user);
+    }
+  }, [response]);
 
   /**
    * Submit hanlder. Calls the login API.

@@ -27,18 +27,15 @@ const App: React.FC<{ user: User }> = () => {
    * the images to not 403. This effect well set the cookie at
    * that interval if the user has been authenticated.
    */
-  useEffect(
-    () => {
-      if (userState) {
-        const interval = setInterval(() => {
-          refreshCookie();
-        }, 1000 * 30);
-        return () => clearInterval(interval);
-      }
-      return () => {};
-    },
-    [userState],
-  );
+  useEffect(() => {
+    if (userState) {
+      const interval = setInterval(() => {
+        refreshCookie();
+      }, 1000 * 30);
+      return () => clearInterval(interval);
+    }
+    return () => {};
+  }, [userState]);
 
   return (
     <UserProvider>

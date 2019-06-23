@@ -155,49 +155,48 @@ const usePosts = (): UsePost => {
   const [total, setTotal] = useState<number>(0);
   const [allPosts, setAllPosts] = useState<PostsWithTagsWithFakes[]>([]);
 
-  useEffect(
-    () => {
-      if (response) {
-        const newPostsByPage = {
-          ...postsByPage,
-          [response.meta.page]: response.data,
-        };
+  useEffect(() => {
+    if (response) {
+      const newPostsByPage = {
+        ...postsByPage,
+        [response.meta.page]: response.data,
+      };
 
-        setPostsByPage(newPostsByPage);
-        if (!total) {
-          setTotal(response.meta.count);
-        }
-        let newAllPosts = [];
-        if (!allPosts.length) {
-          /**
-           * If there are no posts, lets fill an array of length "count" with "fake"
-           * posts so that the list viewer can create a reasonably accurate scrollbar
-           */
-          const allPostsWithTagsWithFakess = [
-            ...Array(response.meta.count).keys(),
-          ].map((num): PostsWithTagsWithFakes => ({
+      setPostsByPage(newPostsByPage);
+      if (!total) {
+        setTotal(response.meta.count);
+      }
+      let newAllPosts = [];
+      if (!allPosts.length) {
+        /**
+         * If there are no posts, lets fill an array of length "count" with "fake"
+         * posts so that the list viewer can create a reasonably accurate scrollbar
+         */
+        const allPostsWithTagsWithFakess = [
+          ...Array(response.meta.count).keys(),
+        ].map(
+          (num): PostsWithTagsWithFakes => ({
             key: `${num}`,
             fake: true,
             imageHeight: '100',
             imageWidth: '100',
             placeholder: getBg(),
-          }));
-          newAllPosts = makePostsListWithFakes(
-            allPostsWithTagsWithFakess,
-            newPostsByPage,
-          );
-        } else {
-          newAllPosts = makePostsListWithFakes(allPosts, newPostsByPage);
-        }
-        log('setting new posts');
-        setAllPosts(newAllPosts);
-        setData({
-          posts: newAllPosts,
-        });
+          }),
+        );
+        newAllPosts = makePostsListWithFakes(
+          allPostsWithTagsWithFakess,
+          newPostsByPage,
+        );
+      } else {
+        newAllPosts = makePostsListWithFakes(allPosts, newPostsByPage);
       }
-    },
-    [response],
-  );
+      log('setting new posts');
+      setAllPosts(newAllPosts);
+      setData({
+        posts: newAllPosts,
+      });
+    }
+  }, [response]);
 
   return { response, loading, error, request, posts: data.posts };
 };

@@ -58,15 +58,12 @@ const Slash: React.FC = (): React.ReactElement => {
     return hash.includes('grid');
   }
 
-  useEffect(
-    () => {
-      log('%c post dep changed', 'background: blue;');
-      const newPosts = [...posts];
-      newPosts.unshift({ fake: true, placeholder: '', key: 'title' });
-      setPostsWithTitle(newPosts);
-    },
-    [posts],
-  );
+  useEffect(() => {
+    log('%c post dep changed', 'background: blue;');
+    const newPosts = [...posts];
+    newPosts.unshift({ fake: true, placeholder: '', key: 'title' });
+    setPostsWithTitle(newPosts);
+  }, [posts]);
 
   useEffect(() => {
     try {

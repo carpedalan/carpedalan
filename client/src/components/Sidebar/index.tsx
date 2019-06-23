@@ -12,10 +12,7 @@ interface StyledSidebarProps {
   theme: any;
   isOpen?: boolean;
 }
-const StyledSidebar =
-  styled.div <
-  StyledSidebarProps >
-  `
+const StyledSidebar = styled.div<StyledSidebarProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
