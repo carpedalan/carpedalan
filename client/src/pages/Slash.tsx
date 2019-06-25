@@ -65,19 +65,6 @@ const Slash: React.FC = (): React.ReactElement => {
     setPostsWithTitle(newPosts);
   }, [posts]);
 
-  useEffect(() => {
-    try {
-      const scroll = localStorage.getItem('scroll');
-      if (scroll) {
-        request({ page: 1 });
-      } else {
-        request({ page: 1 });
-      }
-    } catch (e) {
-      request({ page: 1 });
-    }
-  }, []);
-
   return (
     <>
       <GridListSwitcher>

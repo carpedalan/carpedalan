@@ -11,10 +11,10 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyleComponent, themes } from 'styles/utils';
 import { User } from 'User';
 
-const appDebug = debug('App');
+const log = debug('App');
 
 const refreshCookie = async () => {
-  appDebug('Refreshing cookie', { an: 'object' });
+  log('Refreshing cookie', { an: 'object' });
   const response = await axios.post('/v1/refresh');
 };
 

@@ -5,6 +5,10 @@ import { default as styled } from 'styled-components';
 import Title from 'styles/Title';
 import { getThemeValue, SIDEBAR_COLOR, TEXT } from 'styles/utils';
 import { User } from 'User';
+import useTags from 'hooks/useTags';
+import debug from 'debug';
+
+const log = debug('components:Sidebar');
 
 const { useContext, useEffect } = React;
 interface StyledSidebarProps {
@@ -75,8 +79,15 @@ export default function sidebar({
   userState,
   isOpen,
 }: SidebarProps) {
+  const { tags } = useTags();
+  log('tags', tags);
   return userState ? (
     <StyledSidebar isOpen={isOpen} onClick={toggleMenu}>
+      {tags.map(tag => (
+        <li key={tag.id}>
+          <Link to={`/tags/${tag.name}`}>{tag.name}</Link>
+        </li>
+      ))}
       <div>
         <Close type="button" onClick={toggleMenu}>
           Close ✖

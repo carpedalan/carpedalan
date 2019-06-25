@@ -58,7 +58,7 @@ const Grid = ({
    * @param {number} index
    * @returns Promise<void>
    */
-  function loadMoreItems(index: number) {
+  function loadMoreItems(index: number): Promise<void> {
     const realIndex = index * postsPerRow;
     log('%c Load more items', 'color: red;', { realIndex, index, postsPerRow });
     return request({ page: Math.floor(realIndex / 100) + 1 });

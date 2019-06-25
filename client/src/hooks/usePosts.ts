@@ -90,13 +90,54 @@ function makePostsListWithFakes(
  *
  * @interface UsePost
  */
-interface UsePost {
+export interface UsePost {
   loading: boolean;
   error: Components.Schemas.Error | null;
   request: (arg: Paths.GetPosts.QueryParameters) => Promise<void>;
   posts: PostsWithTagsWithFakes[];
   response: Components.Schemas.PostList | undefined;
 }
+
+/**
+ * Post getter API function.
+ *
+ * @param {Paths.GetPosts.QueryParameters} {
+ *   fields = ['key', 'imageHeight', 'imageWidth', 'status'],
+ *   order = 'asc',
+ *   page = 1,
+ *   isPending = false,
+ * }
+ * @returns {Promise<Paths.GetPosts.Responses.$200>}
+ */
+const getPosts = async ({
+  fields = [
+    'key',
+    'imageHeight',
+    'imageWidth',
+    'status',
+    'orientation',
+    'description',
+  ],
+  order = 'desc',
+  page = 1,
+  isPending = false,
+}: Paths.GetPosts.QueryParameters): Promise<Paths.GetPosts.Responses.$200> => {
+  try {
+    log('Getting posts...', { page });
+    const queryParams: Paths.GetPosts.QueryParameters = {
+      fields,
+      page,
+      order,
+      isPending,
+    };
+    const response = await axios.get(`/v1/posts?${stringify(queryParams)}`);
+    const { data } = response;
+    return data;
+  } catch (e) {
+    if (e.response) throw e.response.data as Components.Schemas.Error;
+    throw e as Components.Schemas.Error;
+  }
+};
 
 /**
  * Custom hook for retrieving posts and managing a list of them.
@@ -106,49 +147,7 @@ interface UsePost {
  * @returns {UsePost}
  */
 const usePosts = (): UsePost => {
-  const { setData, data } = useContext(DataContext);
-  /**
-   * Post getter API function.
-   *
-   * @param {Paths.GetPosts.QueryParameters} {
-   *   fields = ['key', 'imageHeight', 'imageWidth', 'status'],
-   *   order = 'asc',
-   *   page = 1,
-   *   isPending = false,
-   * }
-   * @returns {Promise<Paths.GetPosts.Responses.$200>}
-   */
-  const getPosts = async ({
-    fields = [
-      'key',
-      'imageHeight',
-      'imageWidth',
-      'status',
-      'orientation',
-      'description',
-    ],
-    order = 'desc',
-    page = 1,
-    isPending = false,
-  }: Paths.GetPosts.QueryParameters): Promise<
-    Paths.GetPosts.Responses.$200
-  > => {
-    try {
-      log('Getting posts...', { page });
-      const queryParams: Paths.GetPosts.QueryParameters = {
-        fields,
-        page,
-        order,
-        isPending,
-      };
-      const response = await axios.get(`/v1/posts?${stringify(queryParams)}`);
-      const { data } = response;
-      return data;
-    } catch (e) {
-      if (e.response) throw e.response.data as Components.Schemas.Error;
-      throw e as Components.Schemas.Error;
-    }
-  };
+  const { setPosts, data } = useContext(DataContext);
 
   const { request, response, loading, error } = useApi(getPosts);
   const [postsByPage, setPostsByPage] = useState<PostsByPage>({});
@@ -192,9 +191,7 @@ const usePosts = (): UsePost => {
       }
       log('setting new posts');
       setAllPosts(newAllPosts);
-      setData({
-        posts: newAllPosts,
-      });
+      setPosts(newAllPosts);
     }
   }, [response]);
 

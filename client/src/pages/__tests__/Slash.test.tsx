@@ -10,7 +10,7 @@ import {
   fireEvent,
   render,
   waitForElement,
-} from 'react-testing-library';
+} from '@testing-library/react';
 
 import Slash from '../Slash';
 
@@ -23,25 +23,5 @@ describe('<Slash />', () => {
   it('should match snapshot', () => {
     const app = shallow(<Slash />);
     expect(app).toMatchSnapshot();
-  });
-
-  it('should call the api on mount', async () => {
-    mockedAxios.get.mockImplementation(
-      () =>
-        Promise.resolve({
-          data: {
-            data: [{ key: '1' }],
-            meta: {
-              count: 1000,
-            },
-          },
-        }) as AxiosPromise,
-    );
-    const stuff = render(
-      <BrowserRouter>
-        <Slash />
-      </BrowserRouter>,
-    );
-    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
   });
 });
