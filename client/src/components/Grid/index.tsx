@@ -67,8 +67,8 @@ const Grid = ({
   const Row = ({ index, style }: RowRender) => {
     const postsPerRow = Math.floor(refWidth / 150);
 
-    if (index === 0) {
-      return <div style={style}>Title</div>;
+    if (index === 0 && itemsWithTitle[0]) {
+      return <div style={style}>{itemsWithTitle[0].key}</div>;
     }
 
     return (

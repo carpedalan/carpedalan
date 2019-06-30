@@ -79,9 +79,7 @@ export default function initializeSwagger(app) {
       tags,
       aws,
     },
-    errorMiddleware: (err, req, res, next) => { // eslint-disable-line 
-      
-
+    errorMiddleware: (err, req, res, next) => { // eslint-disable-line
       if (!err.status) {
         res.status(500).json({
           status: 500,

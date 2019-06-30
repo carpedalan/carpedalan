@@ -18,6 +18,7 @@ const { lazy, Suspense, useEffect } = React;
 const LazySlash = lazy(() =>
   import(/* webpackChunkName: "loggedin" */ 'pages/Slash'),
 );
+const LazyTag = lazy(() => import(/* webpackChunkName: "Tag" */ 'pages/Tag'));
 
 const Spinner = () => <div>Spinner</div>;
 
@@ -48,6 +49,13 @@ const Routes: React.FC = () => {
         ) : (
           <Route exact={true} path="/" component={Login} />
         )}
+        {globalUser ? (
+          <Route
+            exact={true}
+            path="/tag/:tagName"
+            render={props => <LazyTag {...props} />}
+          />
+        ) : null}
         <Route component={RedirectToLogin} />
       </Switch>
     </Suspense>

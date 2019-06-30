@@ -7,6 +7,7 @@ import { getThemeValue, SIDEBAR_COLOR, TEXT } from 'styles/utils';
 import { User } from 'User';
 import useTags from 'hooks/useTags';
 import debug from 'debug';
+import useRouter from 'hooks/useRouter';
 
 const log = debug('components:Sidebar');
 
@@ -80,12 +81,16 @@ export default function sidebar({
   isOpen,
 }: SidebarProps) {
   const { tags } = useTags();
+  const {
+    location: { hash, pathname },
+  } = useRouter();
+
   log('tags', tags);
   return userState ? (
     <StyledSidebar isOpen={isOpen} onClick={toggleMenu}>
       {tags.map(tag => (
         <li key={tag.id}>
-          <Link to={`/tags/${tag.name}`}>{tag.name}</Link>
+          <Link to={`/tag/${tag.name}${hash}`}>{tag.name}</Link>
         </li>
       ))}
       <div>

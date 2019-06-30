@@ -14,7 +14,7 @@ import { User } from 'User';
 const log = debug('App');
 
 const refreshCookie = async () => {
-  log('Refreshing cookie', { an: 'object' });
+  log('Refreshing cookie');
   const response = await axios.post('/v1/refresh');
 };
 

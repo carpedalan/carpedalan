@@ -75,8 +75,8 @@ const Feed = ({
   }
 
   const Row = ({ index, style }: RowRender) => {
-    if (index === 0) {
-      return <div style={style}>Title</div>;
+    if (index === 0 && itemsWithTitle[0]) {
+      return <div style={style}>{itemsWithTitle[0].key}</div>;
     }
     return (
       <RowWrapper style={style} data-testid={index}>
@@ -117,7 +117,7 @@ const Feed = ({
       if (post.imageWidth) {
         width = Number(post.imageWidth);
       }
-
+      log('calculating index: ', index, itemsWithTitle, height, width);
       const ratio = height / width;
       let size = ratio * Math.min(containerWidth, 620);
       if (post.description) size += 34;
@@ -127,21 +127,21 @@ const Feed = ({
   }
 
   return (
-    <InfiniteLoader
-      itemCount={itemsWithTitle.length}
-      isItemLoaded={isItemLoaded}
-      loadMoreItems={loadMoreItems}
-    >
-      {({
-        onItemsRendered,
-        ref,
-      }: {
-        onItemsRendered: () => void;
-        ref: React.MutableRefObject<null>;
-      }) => (
-        <Autosizer ref={ref}>
-          {({ height, width }) => (
-            <InnerWrapper>
+    <Autosizer>
+      {({ height, width }) => (
+        <InfiniteLoader
+          itemCount={itemsWithTitle.length}
+          isItemLoaded={isItemLoaded}
+          loadMoreItems={loadMoreItems}
+        >
+          {({
+            onItemsRendered,
+            ref,
+          }: {
+            onItemsRendered: () => void;
+            ref: React.MutableRefObject<null>;
+          }) => (
+            <InnerWrapper ref={ref}>
               <List
                 height={height}
                 onItemsRendered={onItemsRendered}
@@ -152,9 +152,9 @@ const Feed = ({
               />
             </InnerWrapper>
           )}
-        </Autosizer>
+        </InfiniteLoader>
       )}
-    </InfiniteLoader>
+    </Autosizer>
   );
 };
 

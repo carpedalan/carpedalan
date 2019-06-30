@@ -7,7 +7,7 @@ interface StyledProp {
 }
 
 export const formatDate = (timestamp: number): string =>
-  format(fromUnixTime(timestamp), 'MMM d YYYY', {
+  format(fromUnixTime(timestamp), 'MMM d yyyy', {
     awareOfUnicodeTokens: true,
     /* tslint:disable-next-line */
   } as any); 

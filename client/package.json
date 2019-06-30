@@ -13,7 +13,6 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint",
       "tslint --fix",
       "git add"
     ],
@@ -24,7 +23,7 @@
   },
   "dependencies": {
     "@types/react-router": "^5.0.2",
-    "date-fns": "2.0.0-alpha.26",
+    "date-fns": "2.0.0-alpha.37",
     "lodash": "^4.17.11",
     "react": "^16.9.0-alpha.0",
     "react-dom": "^16.9.0-alpha.0",

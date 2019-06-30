@@ -50,6 +50,7 @@ const Slash: React.FC = (): React.ReactElement => {
     PostsWithTagsWithFakes[]
   >(posts);
   const wrapperRef = useRef<HTMLInputElement>(null);
+
   const {
     location: { hash, pathname },
   } = useRouter();
