@@ -45,7 +45,6 @@ const Invitation: React.FC = () => {
   };
 
   const { useField, setValue, form } = useForm('request');
-
   const nameInput = useField({
     handleChange,
     field: 'name',
@@ -72,7 +71,7 @@ const Invitation: React.FC = () => {
   return (
     <InputWrapper>
       <InputForm data-test="submit" onSubmit={handleSubmit}>
-        <StyledTitle center={true}>Request</StyledTitle>
+        <StyledTitle center={true}>Requestz</StyledTitle>
         {user}
         <Input>
           <label htmlFor="name">Name</label>

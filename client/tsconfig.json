@@ -39,6 +39,9 @@
 
           // other typescript-plugin-styled-components options can be added here
           "minify": true,
+      },
+      {
+        "name": "typescript-styled-plugin"
       }        
       ]
   }

@@ -10,7 +10,7 @@ exports[`<Login /> should match snapshot 1`] = `
     <Styled(styled.h1)
       center={true}
     >
-      Login
+      Logizn
     </Styled(styled.h1)>
     <styled.div>
       <input

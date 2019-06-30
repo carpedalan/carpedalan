@@ -9,7 +9,7 @@ exports[`<Request /> should match snapshot 1`] = `
     <Styled(styled.h1)
       center={true}
     >
-      Request
+      Requestz
     </Styled(styled.h1)>
     <styled.div>
       <label
