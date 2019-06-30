@@ -4,6 +4,7 @@
   "description": "Carpe Dalan",
   "main": "index.js",
   "scripts": {
+    "setup": "./scripts/setup.sh",
     "lint": "eslint db imageResizer scripts server shared  --ext .js,.jsx",
     "integration": "NODE_ENV=test PG_HOST=localhost PG_PORT=5555 jest -c jestrc.js --runInBand",
     "integration:ci": "PG_HOST=localhost NODE_ENV=ci jest -c jestrc.js --runInBand --verbose",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@testing-library/react": "^8.0.4",
     "babel-eslint": "^10.0.2",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-preset-jest": "^24.1.0",
