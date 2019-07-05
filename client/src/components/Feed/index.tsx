@@ -98,64 +98,54 @@ const Feed = ({
     return !itemsWithTitle[index].fake;
   }
 
-  /**
-   * Curried function that takes the container width and calculates
-   * the item width based on the image height/width ratio. If there is no height,
-   * assume the ratio is 1.
-   *
-   * @param {number} containerWidth
-   * @returns {(index: number) => number}
-   */
-  function getItemSize(containerWidth: number): (index: number) => number {
-    return function calculateSize(index: number) {
-      const post = itemsWithTitle[index];
-      let height = 1;
-      let width = 1;
-      if (post.imageHeight) {
-        height = Number(post.imageHeight);
-      }
-      if (post.imageWidth) {
-        width = Number(post.imageWidth);
-      }
-      log('calculating index: ', index, itemsWithTitle, height, width);
-      const ratio = height / width;
-      let size = ratio * Math.min(containerWidth, 620);
-      if (post.description) size += 34;
-      if (post.tags && post.tags.length) size += 34;
-      return size + 58;
-    };
+  function calculateSize(index: number) {
+    const post = itemsWithTitle[index];
+    let height = 1;
+    let width = 1;
+    if (post.imageHeight) {
+      height = Number(post.imageHeight);
+    }
+    if (post.imageWidth) {
+      width = Number(post.imageWidth);
+    }
+
+    const ratio = post.orientation === '6' ? width / height : height / width;
+    let size = ratio * Math.min(768, 620);
+    if (post.description) size += 34;
+    if (post.tags && post.tags.length) size += 34;
+    return size + 58;
   }
 
   return (
-    <Autosizer>
-      {({ height, width }) => (
-        <InfiniteLoader
-          itemCount={itemsWithTitle.length}
-          isItemLoaded={isItemLoaded}
-          loadMoreItems={loadMoreItems}
-        >
-          {({
-            onItemsRendered,
-            ref,
-          }: {
-            onItemsRendered: () => void;
-            ref: React.MutableRefObject<null>;
-          }) => (
-            <InnerWrapper ref={ref}>
-              asdf
+    <InfiniteLoader
+      itemCount={itemsWithTitle.length}
+      isItemLoaded={isItemLoaded}
+      loadMoreItems={loadMoreItems}
+    >
+      {({
+        onItemsRendered,
+        ref,
+      }: {
+        onItemsRendered: () => void;
+        ref: React.MutableRefObject<null>;
+      }) => (
+        <Autosizer>
+          {({ height, width }) => (
+            <InnerWrapper>
               <List
+                ref={ref}
                 height={height}
                 onItemsRendered={onItemsRendered}
                 itemCount={itemsWithTitle.length}
-                itemSize={getItemSize(width)}
+                itemSize={calculateSize}
                 width={width}
                 children={Row}
               />
             </InnerWrapper>
           )}
-        </InfiniteLoader>
+        </Autosizer>
       )}
-    </Autosizer>
+    </InfiniteLoader>
   );
 };
 

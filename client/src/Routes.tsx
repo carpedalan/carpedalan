@@ -8,6 +8,7 @@ import * as React from 'react';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import useTags from 'hooks/useTags';
 import debug from 'debug';
+import { onClose } from 'components/Modal';
 
 const log = debug('components:Routes');
 
@@ -18,7 +19,10 @@ const { lazy, Suspense, useEffect } = React;
 const LazySlash = lazy(() =>
   import(/* webpackChunkName: "loggedin" */ 'pages/Slash'),
 );
-const LazyTag = lazy(() => import(/* webpackChunkName: "Tag" */ 'pages/Tag'));
+const LazyTag = lazy(() => import(/* webpackChunkName: "tag" */ 'pages/Tag'));
+const LazyGallery = lazy(() =>
+  import(/* webpackChunkName: "gallery" */ 'components/Gallery'),
+);
 
 const Spinner = () => <div>Spinner</div>;
 
@@ -38,6 +42,7 @@ const Routes: React.FC = () => {
     setUser(undefined);
   }
 
+  const handleClose: onClose = e => {};
   return (
     <Suspense fallback={<Spinner />}>
       <SidebarAndMenu />
@@ -50,14 +55,25 @@ const Routes: React.FC = () => {
           <Route exact={true} path="/" component={Login} />
         )}
         {globalUser ? (
+          <Route exact={true} path="/gallery/**" component={LazySlash} />
+        ) : (
+          <Route exact={true} path="/" component={Login} />
+        )}
+        {globalUser ? (
           <Route
-            exact={true}
             path="/tag/:tagName"
             render={props => <LazyTag {...props} />}
           />
         ) : null}
         <Route component={RedirectToLogin} />
       </Switch>
+      {globalUser ? (
+        <Route
+          exact={true}
+          path="**/gallery/:postId"
+          render={props => <LazyGallery onClose={handleClose} {...props} />}
+        />
+      ) : null}
     </Suspense>
   );
 };

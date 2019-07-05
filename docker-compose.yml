@@ -27,11 +27,13 @@ services:
     volumes:
       - './nodemon.json:/app/nodemon.json:delegated'
       - './server:/app/server:delegated'
+      - './scripts:/app/scripts:delegated'
       - './index.js:/app/index.js:delegated'
       - './db:/app/db:delegated'
       - './shared:/app/shared:delegated'
       - './goodDataWithEtagAndKey.json:/app/goodDataWithEtagAndKey.json'
       - './.env-local:/app/.env'
+      - './dev-dump.sql:/app/dev-dump.sql'
     ports:
       - 3001:80
       - 9227:9229

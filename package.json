@@ -23,8 +23,7 @@
     "e2e:ci": "MIGRATING=true NODE_ENV=ci yarn migrate NODE_ENV=ci yarn knex seed:run --knexfile db/knexfile.js && yarn start:prod",
     "test-junit": "cypress run --reporter junit --reporter-options 'mochaFile=junit-results/my-test-output.xml'",
     "test-multiple": "cypress run --reporter mocha-multi-reporters --reporter-options configFile=config.json",
-    "updateConfig": "aws s3 cp .env-prod s3://configurations-pipeline/.env --profile carpedev",
-    "generateCerts": "sudo openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout ./nginx/nginx-selfsigned.key -out ./nginx/nginx-selfsigned.crt -config ./nginx/req.cnf -sha256"
+    "updateConfig": "aws s3 cp .env-prod s3://configurations-pipeline/.env --profile carpedev"
   },
   "author": "",
   "license": "ISC",

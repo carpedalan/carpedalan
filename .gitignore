@@ -87,3 +87,4 @@ nginx/*.pem
 upload/*
 scripts/touch.js
 commands.sh
+dev-dump.sql

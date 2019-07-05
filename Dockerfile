@@ -31,6 +31,7 @@ CMD ["yarn", "start:prod"]
 
 
 FROM base AS dev
+RUN apk add postgresql
 RUN yarn --ignore-optional
 COPY .env .
 COPY nodemon.json .

@@ -7,9 +7,11 @@ const windowDebug = debug('hooks:window');
 
 const useWindow = () => {
   const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
   function setWindow() {
     requestAnimationFrame(() => {
       windowDebug('Setting width to', window.innerWidth);
+      windowDebug('Setting height to', window.innerHeight);
       setWidth(window.innerWidth);
     });
   }
@@ -19,7 +21,7 @@ const useWindow = () => {
     window.addEventListener('resize', throttledSetWindow);
     return () => window.removeEventListener('resize', throttledSetWindow);
   }, []);
-  return { width };
+  return { width, height };
 };
 
 export default useWindow;

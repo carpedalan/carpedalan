@@ -11,6 +11,7 @@ import {
   TITLE_FONT,
 } from 'styles/utils';
 import { getImageRatio, getOriginalImagePath } from 'utils';
+import useRouter from 'hooks/useRouter';
 
 const Description = styled.div`
   padding: 1em 1em 0;
@@ -56,12 +57,23 @@ const Header = styled(FlexContainer)`
 const Row = ({
   post,
   isSquare = false,
+  width = '100%',
+  safeRef,
 }: {
   post: PostsWithTagsWithFakes;
   isSquare?: boolean;
+  width?: string;
+  safeRef?: React.MutableRefObject<HTMLElement | null>;
 }) => {
+  const { location } = useRouter();
+  const galleryLinkPrefix = location.pathname.endsWith('/')
+    ? location.pathname
+    : `${location.pathname}/`;
+  const galleryLink = `${galleryLinkPrefix}gallery/${
+    post.id ? post.id.split('-')[0] : ''
+  }`;
   return (
-    <article>
+    <article ref={safeRef}>
       <Header justifyContent={FlexEnums.spaceBetween}>
         <Download data-test="date" as="div">
           {post.timestamp ? formatDate(post.timestamp) : null}
@@ -70,16 +82,18 @@ const Row = ({
           Download
         </Download>
       </Header>
-
-      <Picture
-        width="100%"
-        ratio={isSquare ? 1 : getImageRatio(post)}
-        post={post}
-        shouldShowImage={true}
-        placeholderColor={post.placeholder}
-        alt={post.description}
-        type={isSquare ? 'square' : 'original'}
-      />
+      {}
+      <Link to={galleryLink}>
+        <Picture
+          width={width}
+          ratio={isSquare ? 1 : getImageRatio(post)}
+          post={post}
+          shouldShowImage={true}
+          placeholderColor={post.placeholder}
+          alt={post.description}
+          type={isSquare ? 'square' : 'original'}
+        />
+      </Link>
       <Description>
         {post.description ? (
           <figcaption data-test="description">{post.description}</figcaption>
