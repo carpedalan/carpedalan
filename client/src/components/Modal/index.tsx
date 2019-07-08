@@ -3,6 +3,9 @@ import { createPortal } from 'react-dom';
 import { default as styled } from 'styled-components';
 
 import FlexContainer from 'styles/FlexContainer';
+import debug from 'debug';
+
+const log = debug('components:Modal');
 
 const { useEffect } = React;
 
@@ -51,7 +54,9 @@ const Modal = ({ children, onClose, safeRef }: ModalI) => {
   }, []);
 
   function handleClick(e: React.MouseEvent<HTMLElement>) {
+    log('handleClick', e, safeRef);
     if (safeRef.current && !safeRef.current.contains(e.currentTarget)) {
+      log('calling onClose with', e);
       onClose(e);
     }
   }

@@ -42,7 +42,9 @@ const Routes: React.FC = () => {
     setUser(undefined);
   }
 
-  const handleClose: onClose = e => {};
+  const handleClose: onClose = e => {
+    log('close');
+  };
   return (
     <Suspense fallback={<Spinner />}>
       <SidebarAndMenu />

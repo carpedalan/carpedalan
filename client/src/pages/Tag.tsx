@@ -9,9 +9,10 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { default as styled } from 'styled-components';
 import useApi from 'hooks/useApi';
 import useTags from 'hooks/useTags';
+import { DataContext } from 'providers/Data';
 const log = debug('component:Tag');
 
-const { useState, useLayoutEffect } = React;
+const { useState, useContext } = React;
 const InnerWrapper = styled.main`
   max-width: 768px;
   margin: auto;
@@ -71,6 +72,8 @@ const Tag = (
 ): React.ReactElement => {
   const { request, response, loading } = useApi(getPostTags);
 
+  const { addPosts } = useContext(DataContext);
+
   const { tags } = useTags();
 
   const [postsWithTitle, setPostsWithTitle] = useState<
@@ -98,13 +101,14 @@ const Tag = (
     if (response) {
       const newPosts = [...response.data];
       newPosts.unshift({ key: props.match.params.tagName });
-      setPostsWithTitle(
-        newPosts.map(post => ({
-          ...post,
-          fake: false,
-          placeholder: getBg(),
-        })),
-      );
+      const newPostsWithFake = newPosts.map(post => ({
+        ...post,
+        fake: false,
+        placeholder: getBg(),
+      }));
+
+      setPostsWithTitle(newPostsWithFake);
+      addPosts(newPostsWithFake);
     }
   }, [response]);
 

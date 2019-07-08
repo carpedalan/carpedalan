@@ -10,13 +10,13 @@ import { getImageRatio } from '../../utils';
 import Modal, { onClose } from '../Modal';
 import Post from '../Post';
 import { RouteComponentProps } from 'react-router-dom';
-import { PostsWithTagsWithFakes } from 'hooks/useTagPosts';
 import usePosts from 'hooks/usePosts';
 import debug from 'debug';
+import { DataContext } from 'providers/Data';
 
 const log = debug('components:Gallery');
 
-const { useRef } = React;
+const { useRef, useContext } = React;
 
 const { center } = FlexEnums;
 
@@ -32,18 +32,22 @@ interface GalleryI extends RouteComponentProps<{ postId: string }> {
 const Gallery: React.FC<GalleryI> = ({ match, onClose }) => {
   const { width, height } = useWindow();
   const safeRef = useRef(null);
-  const { posts } = usePosts();
-  log('posts', posts);
-  if (!posts.length) return null;
 
-  const post = posts.find(({ id }) => {
+  const {
+    data: { postsById },
+  } = useContext(DataContext);
+  log('posts', postsById);
+
+  const postId = Object.keys(postsById).find(id => {
     if (id) {
       return id.split('-')[0] === match.params.postId;
     }
     return false;
   });
 
-  if (!post) return null;
+  if (!postId) return null;
+
+  const post = postsById[postId];
 
   const viewPortAspectRatio = height / width;
 
@@ -53,7 +57,7 @@ const Gallery: React.FC<GalleryI> = ({ match, onClose }) => {
     photoAspectRatio > viewPortAspectRatio
       ? `${height / photoAspectRatio - 100}px`
       : '100%';
-
+  log('safeRef', safeRef);
   return (
     <Modal onClose={onClose} safeRef={safeRef}>
       <Container alignItems={center} justifyContent={center}>

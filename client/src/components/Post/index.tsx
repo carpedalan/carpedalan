@@ -1,7 +1,7 @@
 import Picture from 'components/Picture';
 import { PostsWithTagsWithFakes } from 'hooks/usePosts';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 import { default as styled } from 'styled-components';
 import FlexContainer, { FlexEnums } from 'styles/FlexContainer';
 import {
@@ -69,9 +69,22 @@ const Row = ({
   const galleryLinkPrefix = location.pathname.endsWith('/')
     ? location.pathname
     : `${location.pathname}/`;
+
   const galleryLink = `${galleryLinkPrefix}gallery/${
     post.id ? post.id.split('-')[0] : ''
   }`;
+
+  const isGallery = location.pathname.includes('gallery');
+  /* tslint:disable-next-line no-any */
+  let Element = React.Fragment as any;
+  let props = {};
+
+  if (!isGallery) {
+    Element = Link as typeof Link;
+    props = {
+      to: galleryLink,
+    };
+  }
   return (
     <article ref={safeRef}>
       <Header justifyContent={FlexEnums.spaceBetween}>
@@ -82,8 +95,7 @@ const Row = ({
           Download
         </Download>
       </Header>
-      {}
-      <Link to={galleryLink}>
+      <Element {...props}>
         <Picture
           width={width}
           ratio={isSquare ? 1 : getImageRatio(post)}
@@ -93,7 +105,7 @@ const Row = ({
           alt={post.description}
           type={isSquare ? 'square' : 'original'}
         />
-      </Link>
+      </Element>
       <Description>
         {post.description ? (
           <figcaption data-test="description">{post.description}</figcaption>

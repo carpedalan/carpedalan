@@ -19,20 +19,24 @@ const data: Data = {
   postsById: {},
 };
 type SetPosts = (posts: PostsWithTagsWithFakes[]) => void;
+type AddPosts = (posts: PostsWithTagsWithFakes[]) => void;
 type SetTags = (posts: Paths.GetTags.Responses.$200) => void;
 export interface DataContextI {
   data: Data;
   setPosts: SetPosts;
   setTags: SetTags;
+  addPosts: AddPosts;
 }
 export const DataContext = createContext<DataContextI>({
   data,
   setPosts: () => {},
   setTags: () => {},
+  addPosts: () => {},
 });
 
 type Action =
   | { type: 'set posts'; payload: PostsWithTagsWithFakes[] }
+  | { type: 'add posts'; payload: PostsWithTagsWithFakes[] }
   | {
       type: 'set tags';
       payload: Paths.GetTags.Responses.$200;
@@ -56,6 +60,13 @@ function reducer(state: Data, action: Action): Data {
         },
       };
       break;
+    case 'add posts': {
+      newState = {
+        ...state,
+        postsById: { ...state.postsById, ...keyBy(action.payload, 'id') },
+      };
+      break;
+    }
     case 'set tags':
       newState = {
         ...state,
@@ -80,6 +91,9 @@ export const DataProvider: React.FC<React.ReactNode> = ({ children }) => {
   const setPosts = (posts: PostsWithTagsWithFakes[]) =>
     dispatch({ type: 'set posts', payload: posts });
 
+  const addPosts = (posts: PostsWithTagsWithFakes[]) =>
+    dispatch({ type: 'set posts', payload: posts });
+
   const setTags = (tags: Paths.GetTags.Responses.$200) => {
     dispatch({ type: 'set tags', payload: tags });
   };
@@ -87,6 +101,7 @@ export const DataProvider: React.FC<React.ReactNode> = ({ children }) => {
   const value: DataContextI = {
     setTags,
     setPosts,
+    addPosts,
     data: state,
   };
   log('value', value);
