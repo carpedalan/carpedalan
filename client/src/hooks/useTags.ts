@@ -17,8 +17,10 @@ const getTags = async (): Promise<Paths.GetTags.Responses.$200> => {
   try {
     log('gettingTags');
     const response = await axios.get('/v1/tags');
+    console.log(response);
     return response.data;
   } catch (e) {
+    console.log(e);
     if (e.response) throw e.response.data as Components.Schemas.Error;
     throw e as Components.Schemas.Error;
   }
@@ -29,7 +31,7 @@ const getTags = async (): Promise<Paths.GetTags.Responses.$200> => {
  *
  * @interface UseTags
  */
-interface UseTags {
+export interface UseTags {
   /**
    * Actual tags returned from global data store
    *
@@ -42,7 +44,8 @@ interface UseTags {
    *
    * @memberof UseTags
    */
-  fetchTags: (arg?: unknown) => Promise<void>;
+  /* tslint:disable-next-line no-any */
+  fetchTags: (arg?: any) => Promise<void>;
 }
 
 export default function useTags(): UseTags {

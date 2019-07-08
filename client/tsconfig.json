@@ -44,5 +44,8 @@
         "name": "typescript-styled-plugin"
       }        
       ]
-  }
+  },
+  "typedocOptions": {
+    "out": "docs"
+}
 }
