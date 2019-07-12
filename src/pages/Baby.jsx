@@ -66,6 +66,7 @@ export default function Baby({ history }) {
       <CenteredP>
         <a href="https://www.amazon.com/baby-reg/kim-dalan-leif-dalan-july-2019-seattle/3TYD6M2JCXJ0S">
           <img
+            width="25%"
             src={`https://${assetDomain}/babyregistry.png`}
             alt="baby registry"
           />
