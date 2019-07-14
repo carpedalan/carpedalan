@@ -21,13 +21,14 @@ workflows:
       - integration:
           requires:
             - dependencies
-      - e2e:
-          requires:
-            - build
+      # - e2e:
+      #     requires:
+      #       - build
       - deploy: 
           requires: 
-            - e2e
+            # - e2e
             - lint
+            - build
             - integration
             - unit_test
 
@@ -44,9 +45,16 @@ jobs:
           name: Install node dependencies
           command: yarn
 
+      - run: 
+          name: Install client dependencies
+          command: |
+            cd client
+            yarn
+
       - save_cache:
           paths:
             - node_modules
+            - client/node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
 
@@ -70,10 +78,15 @@ jobs:
             pip install \
               docker-compose==1.22.0 \
               awscli==1.15.82
+              
 
       - run: 
           name: Set env
           command: ./scripts/setenv.sh
+
+      - run: 
+          name: Build Client
+          command: ./scripts/buildClient.sh
 
       - run: 
           name: Get config
@@ -98,6 +111,11 @@ jobs:
           name: "ESLint"
           command: yarn lint --format junit -o reports/junit/js-lint-results.xml
 
+      - run:
+          name: "TSLint"
+          command: |
+            cd client && yarn lint
+
       - store_test_results:
           path: reports/junit
 
@@ -119,7 +137,7 @@ jobs:
           name: "Jest FE"
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
-          command: yarn test --ci --testResultsProcessor="jest-junit" --coverage --verbose
+          command: cd client && yarn test --ci --coverage --verbose
 
       - store_test_results:
           path: reports/

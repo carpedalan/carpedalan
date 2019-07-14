@@ -1,10 +1,11 @@
 export class CustomError extends Error {}
 
 export class BadRequestError extends CustomError {
-  constructor(message = 'There was an issue with your request') {
+  constructor(message = 'There was an issue with your request', errors = []) {
     super(message);
     this.message = message;
     this.status = 400;
+    this.errors = errors;
   }
 }
 export class UnauthorizedError extends CustomError {

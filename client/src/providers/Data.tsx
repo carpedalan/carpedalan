@@ -1,0 +1,89 @@
+import { PostsWithTagsWithFakes } from 'hooks/usePosts';
+import * as React from 'react';
+import debug from 'debug';
+
+const log = debug('providers:Data');
+
+const { createContext, Children, useState, useReducer } = React;
+export interface Data {
+  posts: PostsWithTagsWithFakes[];
+  tags: Paths.GetTags.Responses.$200;
+}
+const data: Data = {
+  posts: [],
+  tags: [],
+};
+type SetPosts = (posts: PostsWithTagsWithFakes[]) => void;
+type SetTags = (posts: Paths.GetTags.Responses.$200) => void;
+export interface DataContextI {
+  data: Data;
+  setPosts: SetPosts;
+  setTags: SetTags;
+}
+export const DataContext = createContext<DataContextI>({
+  data,
+  setPosts: () => {},
+  setTags: () => {},
+});
+
+type Action =
+  | { type: 'set posts'; payload: PostsWithTagsWithFakes[] }
+  | {
+      type: 'set tags';
+      payload: Paths.GetTags.Responses.$200;
+    };
+
+function reducer(state: Data, action: Action): Data {
+  console.groupCollapsed(
+    `%c ${action.type}`,
+    'background: green; color: white;',
+  );
+  log(`%c Action: "${action.type}"`, 'background: green;', action);
+  let newState = state;
+  switch (action.type) {
+    case 'set posts':
+      newState = {
+        ...state,
+        posts: action.payload,
+      };
+      break;
+    case 'set tags':
+      newState = {
+        ...state,
+        tags: action.payload,
+      };
+      break;
+    default: {
+      newState = state;
+      break;
+    }
+  }
+  log('%c New State', 'background: green', newState);
+  console.groupEnd();
+  return newState;
+}
+
+export const DataConsumer = DataContext.Consumer;
+
+export const DataProvider: React.FC<React.ReactNode> = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, data);
+
+  const setPosts = (posts: PostsWithTagsWithFakes[]) =>
+    dispatch({ type: 'set posts', payload: posts });
+
+  const setTags = (tags: Paths.GetTags.Responses.$200) => {
+    dispatch({ type: 'set tags', payload: tags });
+  };
+
+  const value: DataContextI = {
+    setTags,
+    setPosts,
+    data: state,
+  };
+  log('value', value);
+  return (
+    <DataContext.Provider value={value}>
+      {Children.only(children)}
+    </DataContext.Provider>
+  );
+};

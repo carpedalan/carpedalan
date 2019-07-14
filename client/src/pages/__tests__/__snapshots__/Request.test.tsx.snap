@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Request /> should match snapshot 1`] = `
+<styled.div>
+  <styled.form
+    data-test="submit"
+    onSubmit={[Function]}
+  >
+    <Styled(styled.h1)
+      center={true}
+    >
+      Requestz
+    </Styled(styled.h1)>
+    <styled.div>
+      <label
+        htmlFor="name"
+      >
+        Name
+      </label>
+      <input
+        data-test="name"
+        id="name"
+        name="name"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </styled.div>
+    <styled.div>
+      <label
+        htmlFor="name"
+      >
+        Email
+      </label>
+      <input
+        data-test="email"
+        id="email"
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </styled.div>
+    <styled.button
+      data-test="submit-button"
+      data-testid="submit-button"
+      type="submit"
+    >
+      Request invite
+    </styled.button>
+  </styled.form>
+</styled.div>
+`;

@@ -57,7 +57,7 @@ module.exports = {
       tableName: 'carpe_migrations',
     },
     seeds: {
-      directory: './api-v1/setup/seeds',
+      directory: './server/api-v1/setup/seeds',
     },
     useNullAsDefault: true,
   },
@@ -80,7 +80,7 @@ module.exports = {
       tableName: 'carpe_migrations',
     },
     seeds: {
-      directory: './api-v1/setup/seeds',
+      directory: './server/api-v1/setup/seeds',
     },
     useNullAsDefault: true,
   },
@@ -103,7 +103,7 @@ module.exports = {
       tableName: 'carpe_migrations',
     },
     seeds: {
-      directory: './api-v1/setup/seeds',
+      directory: './server/api-v1/setup/seeds',
     },
     useNullAsDefault: true,
   },

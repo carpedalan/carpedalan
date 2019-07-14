@@ -26,14 +26,13 @@
   <meta name="msapplication-square150x150logo" content="https://{{assetDomain}}/mstile-150x150.png" />
   <meta name="msapplication-wide310x150logo" content="https://{{assetDomain}}/mstile-310x150.png" />
   <meta name="msapplication-square310x310logo" content="https://{{assetDomain}}/mstile-310x310.png" />
-  <link rel="manifest" href="https://{{assetDomain}}/site.webmanifest">
   <link rel="mask-icon" href="https://{{assetDomain}}/safari-pinned-tab.svg" color="#ffb0f5">
   <meta name="msapplication-TileColor" content="#ffb0f5">
   <meta name="theme-color" content="#ffb0f5">  
   <link rel="apple-touch-icon" sizes="180x180" href="https://{{assetDomain}}/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://{{assetDomain}}/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://{{assetDomain}}/favicon-16x16.png">
-  <link rel="manifest" href="https://{{assetDomain}}/site.webmanifest">
+  {{!-- <link rel="manifest" href="https://{{assetDomain}}/site.webmanifest"> --}}
   <link rel="mask-icon" href="https://{{assetDomain}}/safari-pinned-tab.svg" color="#ffb0f5">
   <meta name="apple-mobile-web-app-title" content="Carpe Dalan">
   <meta name="application-name" content="Carpe Dalan">
@@ -54,11 +53,12 @@
     <script type="text/javascript" src="{{this}}"></script>
     {{/each}}
   {{else}}
-  <script type="text/javascript" src="/client.bundle.js"></script>
+  <script type="text/javascript" src="//local.carpedalan.com/dist/client.bundle.js"></script>
   {{/if}}
   {{#if isProd}}
   {{#unless ci}}
   <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- Branch: {{branch}} - Build: {{buildNum}} - sha1 = {{sha1}}-->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133308117-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];

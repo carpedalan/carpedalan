@@ -1,14 +1,30 @@
+import {
+  assetDomain,
+  assets,
+  branch,
+  buildNum,
+  cdnDomain,
+  ci,
+  isProd,
+  nodeEnv,
+  sha1,
+} from './config';
 import { setSignedCloudfrontCookie } from './middlewares';
-import { assets, cdnDomain, isProd, ci, nodeEnv, assetDomain } from './config';
 import db from './db';
 
 let clientAssets = false;
 
 /* istanbul ignore next */
 if (isProd) {
-  const manifest = require('../dist/manifest.json'); // eslint-disable-line global-require,import/no-unresolved
+  const manifest = require('./manifest.json'); // eslint-disable-line global-require,import/no-unresolved
   clientAssets = assets.map(asset => manifest[asset]);
 }
+
+const buildInfo = {
+  branch,
+  buildNum,
+  sha1,
+};
 
 export default (app, openApiDoc) => {
   app.get('/login', (req, res) => {
@@ -19,6 +35,7 @@ export default (app, openApiDoc) => {
       clientAssets,
       isProd,
       assetDomain,
+      ...buildInfo,
       meta: JSON.stringify({
         cdn: cdnDomain,
         ci,
@@ -35,6 +52,7 @@ export default (app, openApiDoc) => {
       isProd,
       clientAssets,
       assetDomain,
+      ...buildInfo,
       meta: JSON.stringify({
         cdn: cdnDomain,
         ci,
@@ -72,13 +90,14 @@ export default (app, openApiDoc) => {
         session: JSON.stringify(req.session),
         clientAssets,
         assetDomain,
+        ...buildInfo,
         meta: JSON.stringify({ cdn: cdnDomain, ci, nodeEnv }),
       });
     }
   });
 
   app.get('/healthcheck', async (req, res) => {
-    await db.raw('select 1+1 as result');
+    if (isProd) await db.raw('select 1+1 as result');
     res.status(200).json({
       farts: 'for your health',
       clownpenis: 'dot fartzz',
@@ -91,6 +110,7 @@ export default (app, openApiDoc) => {
       isProd,
       openApiDoc: JSON.stringify(openApiDoc),
       assetDomain,
+      ...buildInfo,
       session: JSON.stringify(req.session),
       meta: JSON.stringify({
         status: 404,

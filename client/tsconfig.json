@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "allowJs": true,
+      "baseUrl": "src",
+      "checkJs": false,
+      "downlevelIteration": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "importHelpers": true,
+      "jsx": "react",
+      "lib": ["es2015", "es2017", "dom", "dom.iterable"],
+      "module": "esnext",
+      "moduleResolution": "node",
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "outDir": "./dist",
+      "removeComments": false,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "sourceMap": true,
+      "strict": true,
+      "target": "es6",
+      "types": ["node", "webpack-env", "jest"],
+      "plugins": [
+        {
+          "name": "typescript-tslint-plugin",
+          "alwaysShowRuleFailuresAsWarnings": false,
+          "ignoreDefinitionFiles": true,
+          "configFile": "./tslint.json",
+          "suppressWhileTypeErrorsPresent": false
+        },
+        {
+          "transform": "typescript-plugin-styled-components",
+          "type": "config",
+
+          // other typescript-plugin-styled-components options can be added here
+          "minify": true,
+      },
+      {
+        "name": "typescript-styled-plugin"
+      }        
+      ]
+  }
+}

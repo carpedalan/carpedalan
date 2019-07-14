@@ -23,16 +23,16 @@ module.exports = {
   //   '\\.m?js$': 'esm',
   // },
   // transformIgnorePatterns: [],
-  transformIgnorePatterns: [
-    'node_modules/(?!(react-virtualized|react-select|)/)',
-  ],
+  // transformIgnorePatterns: [
+  //   'node_modules/(?!(react-virtualized|react-select|)/)',
+  // ],
 
   coverageDirectory: 'coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 
   testEnvironment: 'node',
-  roots: ['api-v1', 'server'],
-  setupFilesAfterEnv: ['./api-v1/setup/setupTests.js'],
-  globalSetup: './api-v1/setup/globalSetup.js',
-  globalTeardown: './api-v1/setup/globalTeardown.js',
+  roots: ['server', 'db'],
+  setupFilesAfterEnv: ['./server/api-v1/setup/setupTests.js'],
+  globalSetup: './server/api-v1/setup/globalSetup.js',
+  globalTeardown: './server/api-v1/setup/globalTeardown.js',
 };

@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const exif = require('exif-parser');
+const exif = require('exif-parser'); // eslint-disable-line import/no-unresolved
 const glob = require('glob'); // eslint-disable-line
 
 let db;

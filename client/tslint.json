@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "tslint-react-hooks",
+    "tslint-config-airbnb",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "jsRules": {
+    "no-empty": true
+  },
+  "rules": {
+    "prettier": true,
+    "import-spacing": true,
+    "no-any": true,
+    "no-boolean-literal-compare": false,
+    "jsx-no-lambda": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
+  },
+  "linterOptions": {
+    "exclude": ["docs/**/*", "**/__snapshots__/**/*"]
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { shape } from 'prop-types';
 import styled from 'styled-components';

@@ -11,6 +11,7 @@ services:
       NODE_ENV: ci
       PG_HOST: e2e_pg
       CYPRESS_BASE_URL: http://local.carpedalan.com:3001
+      CYPRESS_NUM_TESTS_KEPT_IN_MEMORY: 5
     working_dir: /app
     depends_on:
       e2e_app: 

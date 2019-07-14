@@ -1,6 +1,12 @@
 .git
 .DS_Store
 .gitignore
-
-/node_modules
+/client
+/src
+node_modules
 /photos
+/nginx
+/imageResizer
+/cypress
+/coverage
+/.vscode

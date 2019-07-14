@@ -1,25 +1,23 @@
 import path from 'path';
 
+import bodyParser from 'body-parser';
+import connectPgSimple from 'connect-pg-simple';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import winston from 'winston';
-import expressWinston from 'express-winston';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
 import expbhs from 'express-handlebars';
+import session from 'express-session';
+import expressWinston from 'express-winston';
 import pg from 'pg';
-import connectPgSimple from 'connect-pg-simple';
 import swaggerUi from 'swagger-ui-express';
+import winston from 'winston';
 
-import initialize from '../api-v1/initialize';
-
-import router from './routes';
+import initialize from './api-v1/initialize';
 import {
+  assetDomain,
   assets,
   cdnDomain,
   ci,
-  isDev,
   isProd,
   nodeEnv,
   pgDatabase,
@@ -30,13 +28,13 @@ import {
   port,
   sessionSecret,
   ssl,
-  assetDomain,
 } from './config';
+import router from './routes';
 
 const app = express();
 let clientAssets = false;
 if (isProd) {
-  const manifest = require('../dist/manifest.json'); // eslint-disable-line global-require,import/no-unresolved
+  const manifest = require('./manifest.json'); // eslint-disable-line global-require,import/no-unresolved
   clientAssets = assets.map(asset => manifest[asset]);
 }
 
@@ -64,7 +62,7 @@ export const setup = () => {
   const PgSession = connectPgSimple(session);
   const store = new PgSession({ pool });
   app.set('trust proxy', 1);
-
+  app.enable('view cache');
   // Setup handlebar view engine
   const viewConfig = {
     extname: '.hbs',
@@ -120,19 +118,20 @@ export const setup = () => {
   );
 
   const openApiDoc = initialize(app);
+
   app.use(
-    '/docs',
+    '/api/docs',
     swaggerUi.serve,
     swaggerUi.setup(null, {
       swaggerUrl: '/v1/api-docs',
     }),
   );
 
-  // Use dev and hot webpack middlewares
-  if (isDev) {
-    const { applyWebpackMiddleware } = require('./middlewares'); // eslint-disable-line global-require
-    applyWebpackMiddleware(app);
-  }
+  // // Use dev and hot webpack middlewares
+  // if (isDev) {
+  //   const { applyWebpackMiddleware } = require('./middlewares'); // eslint-disable-line global-require
+  //   applyWebpackMiddleware(app);
+  // }
 
   // express-winston logger BEFORE the router
   if (isProd) {
@@ -164,6 +163,7 @@ export const setup = () => {
   }
   // Define routes
   router(app, openApiDoc);
+  // app.use((req, res) => res.send('hello'));
 
   if (isProd) {
     const Sentry = require('@sentry/node'); // eslint-disable-line

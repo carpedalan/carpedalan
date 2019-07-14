@@ -27,5 +27,6 @@ echo ${PIPELINE_BUCKET}
 aws s3 cp "s3://${PIPELINE_BUCKET}/.env" .
 aws s3 cp "s3://${PIPELINE_BUCKET}/server/cfkeys" ./server/cfkeys/ --recursive 
 aws s3 cp "s3://${PIPELINE_BUCKET}/goodDataWithEtagAndKey.json" .
+aws s3 cp "s3://${ASSETS_BUCKET}/manifest-${CIRCLE_SHA1}.json" ./server/manifest.json
 echo 'keys'
 ls ./server/cfkeys/ -al

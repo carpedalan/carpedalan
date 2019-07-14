@@ -16,6 +16,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+.coverage
 
 # nyc test coverage
 .nyc_output
@@ -73,6 +74,7 @@ container-definition.json
 /data.js
 goodData*
 dist
+docs
 retinal/node_modules
 imageResizer.zip
 photos

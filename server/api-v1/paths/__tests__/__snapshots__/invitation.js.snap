@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /invitation should send an email 1`] = `
+Array [
+  Object {
+    "Destination": Object {
+      "ToAddresses": Array [
+        "leifdalan@gmail.com",
+      ],
+    },
+    "Message": Object {
+      "Body": Object {
+        "Html": Object {
+          "Charset": "UTF-8",
+          "Data": "farts with email: leif@fo.co requested access.",
+        },
+        "Text": Object {
+          "Charset": "UTF-8",
+          "Data": "Reqestsz",
+        },
+      },
+      "Subject": Object {
+        "Charset": "UTF-8",
+        "Data": "Request to carpedalan.com",
+      },
+    },
+    "ReplyToAddresses": Array [
+      "no-reply@farts.com",
+    ],
+    "Source": "4dMiN@carpedalan.com",
+  },
+]
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Slash /> should match snapshot 1`] = `
+<Fragment>
+  <styled.div>
+    <Link
+      to="#grid"
+    >
+      Grid
+    </Link>
+  </styled.div>
+  <styled.div
+    data-testid="home"
+  >
+    <Feed
+      itemsWithTitle={Array []}
+    />
+  </styled.div>
+</Fragment>
+`;

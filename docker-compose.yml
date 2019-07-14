@@ -2,10 +2,10 @@ version: '2.3'
 
 services:
   alb:
-    container_name: c_alb
-    # depends_on:
-    #   carpapp: 
-    #     condition: service_healthy
+    container_name: alb
+    depends_on:
+      carpe_api: 
+        condition: service_healthy
     image: ekino/nginx-brotli:latest-1.12.2-bfd2885
     restart: always
     volumes: 
@@ -13,11 +13,10 @@ services:
       - ./nginx/local.carpedalan.com.pem:/etc/ssl/certs/local.carpedalan.com.pem
       - ./nginx/local.carpedalan.com-key.pem:/etc/ssl/private/local.carpedalan.com-key.pem
     ports:
-      - 80:80
       - 443:443
 
-  carpapp:
-    container_name: carpapp
+  carpe_api:
+    container_name: c_api
     depends_on:
       pg:
         condition: service_healthy
@@ -26,16 +25,13 @@ services:
       context: .
       target: dev
     volumes:
-      - ./src:/app/src:delegated
-      - ./nodemon.json:/app/nodemon.json:delegated
-      - ./server:/app/server:delegated
-      - ./scripts:/app/scripts:delegated
-      - ./db:/app/db:delegated
-      - ./shared:/app/shared:delegated
-      - ./api-v1:/app/api-v1:delegated
-      - ./goodDataWithEtagAndKey.json:/app/goodDataWithEtagAndKey.json
-      - ./.env-local:/app/.env
-      - ./webpack.config.js:/app/webpack.config.js
+      - './nodemon.json:/app/nodemon.json:delegated'
+      - './server:/app/server:delegated'
+      - './index.js:/app/index.js:delegated'
+      - './db:/app/db:delegated'
+      - './shared:/app/shared:delegated'
+      - './goodDataWithEtagAndKey.json:/app/goodDataWithEtagAndKey.json'
+      - './.env-local:/app/.env'
     ports:
       - 3001:80
       - 9227:9229
@@ -43,12 +39,26 @@ services:
       PORT: 80
     command: yarn migrateAndStart
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail localhost:80/login || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail localhost:80/healthcheck || exit 1"]
       interval: 1s
       timeout: 1s
       retries: 40
 
+  client: 
+    tty: true
+    container_name: client
+    build:
+      context: ./client
+    volumes: 
+      - ./client/src:/app/src
+      - ./client/docs:/app/docs
+      - ./client/webpack.config.js:/app/webpack.config.js
+      - ./client/devServer.js:/app/devServer.js
+
   pg:
+    logging: 
+      driver: "none"
+
     image: postgres:10.0-alpine
     container_name: pg
     environment:
@@ -64,8 +74,8 @@ services:
       retries: 20
 
   pg_test:
-    # logging: 
-    #   driver: "none"
+    logging: 
+      driver: "none"
     image: postgres:10.0-alpine
     container_name: test
     environment:

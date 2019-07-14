@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> should match snapshot 1`] = `
+<styled.div>
+  <styled.form
+    data-test="submit"
+    data-testid="submit"
+    onSubmit={[Function]}
+  >
+    <Styled(styled.h1)
+      center={true}
+    >
+      Logizn
+    </Styled(styled.h1)>
+    <styled.div>
+      <input
+        data-test="password"
+        name="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </styled.div>
+    <styled.button
+      data-test="submit-button"
+      data-testid="submit-button"
+      type="submit"
+    >
+      Login
+    </styled.button>
+    <Link
+      to="/request"
+    >
+      Request access
+    </Link>
+  </styled.form>
+</styled.div>
+`;

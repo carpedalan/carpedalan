@@ -17,9 +17,10 @@ dotenv.config({
       ? path.resolve(process.cwd(), '.env.test')
       : path.resolve(process.cwd(), '.env'),
 });
+const thing = require('./server/server.js');
 
 try {
-  const { setup, start } = require('./server/server');
+  const { setup, start } = thing;
   const { app } = setup();
   start(app);
 } catch (e) {
