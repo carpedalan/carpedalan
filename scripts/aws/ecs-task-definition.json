@@ -70,7 +70,7 @@
   ],
   "placementConstraints": [],
   "memory": "512",
-  "taskRoleArn": null,
+  "taskRoleArn": "arn:aws:iam::404112572358:role/ecs-ec2-ses",
   "compatibilities": [
     "EC2"
   ],
