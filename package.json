@@ -106,7 +106,7 @@
     "@sentry/browser": "^4.5.3",
     "@sentry/node": "^4.5.3",
     "aws-cloudfront-sign": "^2.2.0",
-    "aws-sdk": "^2.397.0",
+    "aws-sdk": "^2.493.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-styled-components": "^1.10.0",

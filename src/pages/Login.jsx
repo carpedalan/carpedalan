@@ -13,7 +13,7 @@ import { API_PATH } from '../../shared/constants';
 
 import { User } from '..';
 
-import { BRAND_COLOR, getThemeValue, prop, MAIN } from '../styles';
+import { prop } from '../styles';
 import DangerText from '../styles/DangerText';
 import Title from '../styles/Title';
 
