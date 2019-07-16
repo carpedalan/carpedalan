@@ -44,7 +44,9 @@ const invitation = () => {
     };
     console.log(params, 'params'); // eslint-disable-line
     try {
-      const receipt = await ses.sendEmail(params).promise();
+      const promise = ses.sendEmail(params).promise();
+      console.log('promise', promise); // eslint-disable-line
+      const receipt = await promise;
       console.log('receipt', receipt); // eslint-disable-line
       res.status(200).json(receipt);
     } catch (e) {
