@@ -71,7 +71,7 @@
   "dependencies": {
     "@sentry/node": "^4.5.3",
     "aws-cloudfront-sign": "^2.2.0",
-    "aws-sdk": "^2.397.0",
+    "aws-sdk": "^2.493.0",
     "body-parser": "^1.18.3",
     "connect-pg-simple": "^5.0.0",
     "cookie-parser": "^1.4.3",

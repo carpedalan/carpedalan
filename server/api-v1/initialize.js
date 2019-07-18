@@ -7,6 +7,7 @@ import Posts from './paths/posts';
 import PostsId from './paths/posts/{id}';
 import Bulk from './paths/posts/bulk';
 import Refresh from './paths/refresh';
+import Invitation from './paths/invitation';
 import Tags from './paths/tags';
 import TagPosts from './paths/tags/{tagId}/posts';
 import Login from './paths/login';

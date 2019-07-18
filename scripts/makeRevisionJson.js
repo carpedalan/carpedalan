@@ -59,6 +59,8 @@ const json = {
   networkMode: 'awsvpc',
   volumes: [],
   requiresCompatibilities: ['EC2'],
+  // todo make this a var
+  taskRoleArn: 'arn:aws:iam::404112572358:role/ecs-ec2-ses',
 };
 
 fs.writeFileSync('container-definition.json', JSON.stringify(json), 'utf8');

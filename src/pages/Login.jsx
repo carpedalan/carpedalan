@@ -13,7 +13,7 @@ import { API_PATH } from '../../shared/constants';
 
 import { User } from '..';
 
-import { BRAND_COLOR, getThemeValue, prop, MAIN } from '../styles';
+import { prop } from '../styles';
 import DangerText from '../styles/DangerText';
 import Title from '../styles/Title';
 
@@ -50,19 +50,27 @@ const StyledTitle = styled(Title)`
   margin: 0;
 `;
 
-const StyledButton = styled.button`
-  color: ${getThemeValue(BRAND_COLOR)};
-  background: ${getThemeValue(MAIN)};
-  border: none;
-  padding: 1em 3em;
-  cursor: pointer;
-  outline: inherit;
+// const StyledButton = styled.button`
+//   color: ${getThemeValue(BRAND_COLOR)};
+//   background: ${getThemeValue(MAIN)};
+//   border: none;
+//   padding: 1em 3em;
+//   cursor: pointer;
+//   outline: inherit;
+// `;
+
+const TestButton = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 0;
+  left: 0;
 `;
 
 export default function Login({ location: { pathname }, status }) {
   const { setUser } = useContext(User);
   const [error, setError] = useState(null);
-  const [requestAccess, setRequestAccess] = useState(false);
+  const [requestAccess /* setRequestAccess */] = useState(false);
   const [accessRequested, setAccessRequested] = useState(false);
 
   const submitLogin = async ({ password }) => {
@@ -77,12 +85,12 @@ export default function Login({ location: { pathname }, status }) {
     }
   };
 
-  const submitRequestAccess = async ({ email, firstName, lastName }) => {
+  const submitRequestAccess = async ({ email, firstName, lastName }) => { // eslint-disable-line
     try {
-      await request.post(`${API_PATH}/request`, {
-        email,
-        firstName,
-        lastName,
+      await request.post(`${API_PATH}/invitation`, {
+        email: 'test@test.com',
+        firstName: 'test',
+        lastName: 'farts',
       });
       setAccessRequested(true);
     } catch (e) {
@@ -162,11 +170,12 @@ export default function Login({ location: { pathname }, status }) {
             </>
           )}
           {!requestAccess ? (
-            <StyledButton type="button" onClick={() => setRequestAccess(true)}>
+            <a href="&#109;a&#105;l&#116;&#111;&#58;%&#54;&#51;ar&#112;e%64&#97;lan&#64;&#103;mail&#46;&#99;%&#54;F%6&#68;?subject=I'd like access to carpedalan.com, please!">
               Request Access
-            </StyledButton>
+            </a>
           ) : null}
         </InputForm>
+        <TestButton onClick={() => submitRequestAccess({})} />
       </InputWrapper>
     </>
   );

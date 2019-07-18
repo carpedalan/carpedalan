@@ -1,15 +1,18 @@
 import SES from 'aws-sdk/clients/ses';
-import { AWSError } from 'aws-sdk';
 
+import { AWSError } from '../../server/errors';
 import { commonErrors } from '../refs/error';
+// import { awsRegion } from '../../server/config';
 
-const ses = new SES();
+const ses = new SES({
+  region: 'us-west-2',
+});
 
 const status = 200;
 
 const invitation = () => {
   const post = async (req, res) => {
-    const { email, name } = req.body;
+    const { email, firstName, lastName } = req.body;
     const params = {
       Destination: {
         ToAddresses: [
@@ -21,7 +24,7 @@ const invitation = () => {
         Body: {
           Html: {
             Charset: 'UTF-8',
-            Data: `${name} with email: ${email} requested access.`,
+            Data: `${firstName} ${lastName} with email: ${email} requested access.`,
           },
           Text: {
             Charset: 'UTF-8',
@@ -33,16 +36,22 @@ const invitation = () => {
           Data: 'Request to carpedalan.com',
         },
       },
-      Source: '4dMiN@carpedalan.com' /* required */,
+      Source: 'leifdalan@gmail.com' /* required */,
       ReplyToAddresses: [
         'no-reply@farts.com',
         /* more items */
       ],
     };
+    console.log(params, 'params'); // eslint-disable-line
     try {
-      const receipt = await ses.sendEmail(params).promise();
+      const promise = ses.sendEmail(params).promise();
+      console.log('promise', promise); // eslint-disable-line
+      const receipt = await promise;
+      console.log('receipt', receipt); // eslint-disable-line
       res.status(200).json(receipt);
     } catch (e) {
+      console.log('error', e); // eslint-disable-line
+      res.status(500).send();
       throw new AWSError(e);
     }
   };
@@ -59,12 +68,17 @@ const invitation = () => {
           schema: {
             type: 'object',
             description: 'Payload for invitation',
-            required: ['name', 'email'],
+            required: ['email'],
             properties: {
-              name: {
-                description: 'Name',
+              firstName: {
+                description: 'Fist Name',
                 type: 'string',
-                example: 'Jay Inslee',
+                example: 'Jay',
+              },
+              lastName: {
+                description: 'Last Name',
+                type: 'string',
+                example: 'Inslee',
               },
               email: {
                 description: 'E-mail',
