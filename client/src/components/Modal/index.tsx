@@ -55,7 +55,7 @@ const Modal = ({ children, onClose, safeRef }: ModalI) => {
 
   function handleClick(e: React.MouseEvent<HTMLElement>) {
     log('handleClick', e, safeRef);
-    if (safeRef.current && !safeRef.current.contains(e.currentTarget)) {
+    if (safeRef.current && !safeRef.current.contains(e.target as Node)) {
       log('calling onClose with', e);
       onClose(e);
     }

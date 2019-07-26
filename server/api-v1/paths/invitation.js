@@ -1,6 +1,6 @@
 import SES from 'aws-sdk/clients/ses';
 
-import { AWSError } from '../../server/errors';
+import { AWSError } from '../../errors';
 import { commonErrors } from '../refs/error';
 // import { awsRegion } from '../../server/config';
 

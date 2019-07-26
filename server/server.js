@@ -117,7 +117,7 @@ export const setup = () => {
     }),
   );
 
-  const openApiDoc = initialize(app);
+  
 
   app.use(
     '/api/docs',
@@ -161,9 +161,12 @@ export const setup = () => {
       }),
     );
   }
-  // Define routes
+  // api  
+  const openApiDoc = initialize(app);
+
+  // Define webserver routes
   router(app, openApiDoc);
-  // app.use((req, res) => res.send('hello'));
+
 
   if (isProd) {
     const Sentry = require('@sentry/node'); // eslint-disable-line
