@@ -2,7 +2,6 @@ import * as React from 'react';
 import { arrayOf, func, shape } from 'prop-types';
 import { default as styled } from 'styled-components';
 
-// import NotFound from 'pages/NotFound';
 import useWindow from 'hooks/useWindow';
 import FlexContainer, { FlexEnums } from 'styles/FlexContainer';
 import { getImageRatio } from '../../utils';
@@ -58,7 +57,13 @@ const Gallery: React.FC<GalleryI> = ({ match, history, location }) => {
 
   const onClose: onClose = e => {
     e.preventDefault();
-    log('closing', match, location);
+
+    // Remove /gallery and /:postId
+    const routeWithoutGallery = location.pathname
+      .replace(`/${match.params.postId}`, '')
+      .replace('/gallery', '');
+    log('route', routeWithoutGallery);
+    history.push(`${routeWithoutGallery || '/'}${location.hash}`);
   };
 
   return (

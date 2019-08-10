@@ -116,7 +116,7 @@ const Feed = ({
     if (post.tags && post.tags.length) size += 34;
     return size + 58;
   }
-  log('itemsWithtitle', itemsWithTitle);
+
   return (
     <Autosizer>
       {({ height, width }) => (

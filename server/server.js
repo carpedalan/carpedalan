@@ -117,8 +117,6 @@ export const setup = () => {
     }),
   );
 
-  
-
   app.use(
     '/api/docs',
     swaggerUi.serve,
@@ -161,12 +159,11 @@ export const setup = () => {
       }),
     );
   }
-  // api  
+  // api
   const openApiDoc = initialize(app);
 
   // Define webserver routes
   router(app, openApiDoc);
-
 
   if (isProd) {
     const Sentry = require('@sentry/node'); // eslint-disable-line
