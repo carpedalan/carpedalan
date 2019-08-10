@@ -12,7 +12,7 @@ Array [
       "Body": Object {
         "Html": Object {
           "Charset": "UTF-8",
-          "Data": "farts with email: leif@fo.co requested access.",
+          "Data": "undefined undefined with email: leif@fo.co requested access.",
         },
         "Text": Object {
           "Charset": "UTF-8",
@@ -27,7 +27,7 @@ Array [
     "ReplyToAddresses": Array [
       "no-reply@farts.com",
     ],
-    "Source": "4dMiN@carpedalan.com",
+    "Source": "leifdalan@gmail.com",
   },
 ]
 `;

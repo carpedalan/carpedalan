@@ -60,7 +60,6 @@ const Grid = ({
    */
   function loadMoreItems(index: number): Promise<void> {
     const realIndex = index * postsPerRow;
-    log('%c Load more items', 'color: red;', { realIndex, index, postsPerRow });
     return request({ page: Math.floor(realIndex / 100) + 1 });
   }
 
@@ -121,34 +120,37 @@ const Grid = ({
 
   return (
     <Wrapper ref={wrapperRef}>
-      <InfiniteLoader
-        itemCount={itemsWithTitle.length}
-        isItemLoaded={isItemLoaded}
-        loadMoreItems={loadMoreItems}
-      >
-        {({
-          onItemsRendered,
-          ref,
-        }: {
-          onItemsRendered: () => void;
-          ref: React.MutableRefObject<null>;
-        }) => (
-          <Autosizer ref={ref}>
-            {({ height, width }) => (
+      <Autosizer>
+        {({ height, width }) => (
+          <InfiniteLoader
+            itemCount={itemsWithTitle.length}
+            isItemLoaded={isItemLoaded}
+            loadMoreItems={loadMoreItems}
+          >
+            {({
+              onItemsRendered,
+              ref,
+            }: {
+              onItemsRendered: () => void;
+              ref: React.MutableRefObject<null>;
+            }) => (
               <InnerWrapper>
                 <List
+                  ref={ref}
                   height={height}
                   onItemsRendered={onItemsRendered}
-                  itemCount={Math.floor(itemsWithTitle.length / postsPerRow)}
+                  itemCount={Math.floor(
+                    itemsWithTitle.length / postsPerRow + 1,
+                  )}
                   itemSize={getItemSize(width)}
                   width={width}
                   children={Row}
                 />
               </InnerWrapper>
             )}
-          </Autosizer>
+          </InfiniteLoader>
         )}
-      </InfiniteLoader>
+      </Autosizer>
     </Wrapper>
   );
 };

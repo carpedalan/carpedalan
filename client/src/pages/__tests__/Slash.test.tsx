@@ -24,4 +24,5 @@ describe('<Slash />', () => {
     const app = shallow(<Slash />);
     expect(app).toMatchSnapshot();
   });
+  // it('should')
 });

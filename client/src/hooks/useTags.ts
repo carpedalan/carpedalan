@@ -17,10 +17,8 @@ const getTags = async (): Promise<Paths.GetTags.Responses.$200> => {
   try {
     log('gettingTags');
     const response = await axios.get('/v1/tags');
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
     if (e.response) throw e.response.data as Components.Schemas.Error;
     throw e as Components.Schemas.Error;
   }
@@ -53,7 +51,6 @@ export default function useTags(): UseTags {
   const { setTags, data } = useContext(DataContext);
   useEffect(() => {
     if (response) {
-      log('response for set tags, setting', setTags);
       setTags(response);
     }
   }, [response]);

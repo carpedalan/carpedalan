@@ -73,7 +73,7 @@ const Routes: React.FC = () => {
         <Route
           exact={true}
           path="**/gallery/:postId"
-          render={props => <LazyGallery onClose={handleClose} {...props} />}
+          render={props => <LazyGallery {...props} />}
         />
       ) : null}
     </Suspense>

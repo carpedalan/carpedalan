@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import { default as styled } from 'styled-components';
 import FlexContainer, { FlexEnums } from 'styles/FlexContainer';
+import usePostLink from 'hooks/usePostLink';
 import {
   BRAND_COLOR,
   formatDate,
@@ -65,26 +66,7 @@ const Row = ({
   width?: string;
   safeRef?: React.MutableRefObject<HTMLElement | null>;
 }) => {
-  const { location } = useRouter();
-  const galleryLinkPrefix = location.pathname.endsWith('/')
-    ? location.pathname
-    : `${location.pathname}/`;
-
-  const galleryLink = `${galleryLinkPrefix}gallery/${
-    post.id ? post.id.split('-')[0] : ''
-  }`;
-
-  const isGallery = location.pathname.includes('gallery');
-  /* tslint:disable-next-line no-any */
-  let Element = React.Fragment as any;
-  let props = {};
-
-  if (!isGallery) {
-    Element = Link as typeof Link;
-    props = {
-      to: galleryLink,
-    };
-  }
+  const { Element, props } = usePostLink(post);
   return (
     <article ref={safeRef}>
       <Header justifyContent={FlexEnums.spaceBetween}>

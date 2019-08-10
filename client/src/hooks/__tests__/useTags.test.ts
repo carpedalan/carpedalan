@@ -1,4 +1,4 @@
-import { act } from 'react-dom/test-utils';
+import { act } from '@testing-library/react';
 import { testHook, tick } from '../../testutils';
 import useTags, { UseTags } from '../useTags';
 import axios from 'axios';
@@ -27,10 +27,13 @@ describe('useTags', () => {
     mockedAxios.get.mockImplementation(() =>
       Promise.resolve({ data: ['a tag'] }),
     );
-    await tagReturn.fetchTags();
+
+    await act(async () => {
+      await tagReturn.fetchTags();
+    });
+
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith('/v1/tags');
-    await tick();
-    // expect(tagReturn.tags).toMatchObject(['a tag']);
+    expect(tagReturn.tags).toMatchObject(['a tag']);
   });
 });

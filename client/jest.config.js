@@ -33,7 +33,7 @@ module.exports = {
   ],
   coverageReporters: ['text', 'lcov'],
   clearMocks: true,
-  setupTestFrameworkScriptFile: '<rootDir>/setupTests.js',
+  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
 
   snapshotSerializers: ['enzyme-to-json/serializer'],
   preset: 'ts-jest',

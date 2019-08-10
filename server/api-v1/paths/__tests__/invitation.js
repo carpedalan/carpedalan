@@ -35,7 +35,7 @@ describe('POST /invitation', () => {
       .set('Content-Type', 'application/json');
     validate(400, response);
     expect(response.body.errors[0].message).toBe(
-      "should have required property 'name'",
+      "should have required property 'email'",
     );
   });
 

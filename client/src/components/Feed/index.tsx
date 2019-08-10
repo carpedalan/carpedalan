@@ -95,10 +95,11 @@ const Feed = ({
    * @returns {boolean}
    */
   function isItemLoaded(index: number): boolean {
+    log('checking', !itemsWithTitle[index].fake);
     return !itemsWithTitle[index].fake;
   }
 
-  function calculateSize(index: number) {
+  function calculateSize(index: number): number {
     const post = itemsWithTitle[index];
     let height = 1;
     let width = 1;
@@ -115,22 +116,22 @@ const Feed = ({
     if (post.tags && post.tags.length) size += 34;
     return size + 58;
   }
-
+  log('itemsWithtitle', itemsWithTitle);
   return (
-    <InfiniteLoader
-      itemCount={itemsWithTitle.length}
-      isItemLoaded={isItemLoaded}
-      loadMoreItems={loadMoreItems}
-    >
-      {({
-        onItemsRendered,
-        ref,
-      }: {
-        onItemsRendered: () => void;
-        ref: React.MutableRefObject<null>;
-      }) => (
-        <Autosizer>
-          {({ height, width }) => (
+    <Autosizer>
+      {({ height, width }) => (
+        <InfiniteLoader
+          itemCount={itemsWithTitle.length}
+          isItemLoaded={isItemLoaded}
+          loadMoreItems={loadMoreItems}
+        >
+          {({
+            onItemsRendered,
+            ref,
+          }: {
+            onItemsRendered: () => void;
+            ref: React.MutableRefObject<null>;
+          }) => (
             <InnerWrapper>
               <List
                 ref={ref}
@@ -143,9 +144,9 @@ const Feed = ({
               />
             </InnerWrapper>
           )}
-        </Autosizer>
+        </InfiniteLoader>
       )}
-    </InfiniteLoader>
+    </Autosizer>
   );
 };
 

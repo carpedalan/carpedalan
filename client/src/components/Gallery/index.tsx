@@ -25,11 +25,9 @@ const Container = styled(FlexContainer)`
   height: 100%;
 `;
 
-interface GalleryI extends RouteComponentProps<{ postId: string }> {
-  onClose: onClose;
-}
+interface GalleryI extends RouteComponentProps<{ postId: string }> {}
 
-const Gallery: React.FC<GalleryI> = ({ match, onClose }) => {
+const Gallery: React.FC<GalleryI> = ({ match, history, location }) => {
   const { width, height } = useWindow();
   const safeRef = useRef(null);
 
@@ -57,7 +55,12 @@ const Gallery: React.FC<GalleryI> = ({ match, onClose }) => {
     photoAspectRatio > viewPortAspectRatio
       ? `${height / photoAspectRatio - 100}px`
       : '100%';
-  log('safeRef', safeRef);
+
+  const onClose: onClose = e => {
+    e.preventDefault();
+    log('closing', match, location);
+  };
+
   return (
     <Modal onClose={onClose} safeRef={safeRef}>
       <Container alignItems={center} justifyContent={center}>
