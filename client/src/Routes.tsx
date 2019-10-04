@@ -10,15 +10,16 @@ import useTags from 'hooks/useTags';
 import debug from 'debug';
 import { onClose } from 'components/Modal';
 
+import Slash from 'pages/Slash';
 const log = debug('components:Routes');
 
 const RedirectToLogin = () => <Redirect to="/" />;
 
 const { lazy, Suspense, useEffect } = React;
 
-const LazySlash = lazy(() =>
-  import(/* webpackChunkName: "loggedin" */ 'pages/Slash'),
-);
+// const LazySlash = lazy(() =>
+//   import(/* webpackChunkName: "loggedin" */ 'pages/Slash'),
+// );
 const LazyTag = lazy(() => import(/* webpackChunkName: "tag" */ 'pages/Tag'));
 const LazyGallery = lazy(() =>
   import(/* webpackChunkName: "gallery" */ 'components/Gallery'),
@@ -46,18 +47,18 @@ const Routes: React.FC = () => {
     log('close');
   };
   return (
-    <Suspense fallback={<Spinner />}>
+    <>
       <SidebarAndMenu />
       <Switch>
         <Route exact={true} path="/request" component={Request} />
 
         {globalUser ? (
-          <Route exact={true} path="/" component={LazySlash} />
+          <Route exact={true} path="/" component={Slash} />
         ) : (
           <Route exact={true} path="/" component={Login} />
         )}
         {globalUser ? (
-          <Route exact={true} path="/gallery/**" component={LazySlash} />
+          <Route path="/gallery" component={Slash} />
         ) : (
           <Route exact={true} path="/" component={Login} />
         )}
@@ -69,14 +70,7 @@ const Routes: React.FC = () => {
         ) : null}
         <Route component={RedirectToLogin} />
       </Switch>
-      {globalUser ? (
-        <Route
-          exact={true}
-          path="**/gallery/:postId"
-          render={props => <LazyGallery {...props} />}
-        />
-      ) : null}
-    </Suspense>
+    </>
   );
 };
 

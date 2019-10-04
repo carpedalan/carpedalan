@@ -70,7 +70,7 @@ const Feed = ({
    * @returns Promise<void>
    */
   function loadMoreItems(index: number) {
-    log('loading from feed');
+    log('loading from feedd');
     return request({ page: Math.floor(index / 100) + 1 });
   }
 

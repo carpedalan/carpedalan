@@ -4,11 +4,17 @@ import debug from 'debug';
 import usePosts, { PostsWithTagsWithFakes } from 'hooks/usePosts';
 import useRouter from 'hooks/useRouter';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { default as styled } from 'styled-components';
+import Gallery from 'components/Gallery';
 const log = debug('component:Slash');
 
-const { useState, useLayoutEffect } = React;
+const { useState, useLayoutEffect, lazy, Fragment } = React;
+
+// const LazyGallery = lazy(() =>
+//   import(/* webpackChunkName: "gallery" */ 'components/Gallery'),
+// );
+
 const InnerWrapper = styled.main`
   max-width: 768px;
   margin: auto;
@@ -49,7 +55,6 @@ const Slash: React.FC = (): React.ReactElement => {
   const [postsWithTitle, setPostsWithTitle] = useState<
     PostsWithTagsWithFakes[]
   >(posts);
-  const wrapperRef = useRef<HTMLInputElement>(null);
 
   const {
     location: { hash, pathname },
@@ -67,21 +72,22 @@ const Slash: React.FC = (): React.ReactElement => {
   }, [posts]);
 
   return (
-    <>
+    <Fragment>
       <GridListSwitcher>
         <Link to={`${pathname}${hash.includes('grid') ? '' : '#grid'}`}>
           {hash.includes('grid') ? 'List' : 'Grid'}
         </Link>
       </GridListSwitcher>
 
-      <Wrapper data-testid="home" ref={wrapperRef}>
+      <Wrapper data-testid="home">
         {isGrid() ? (
           <Grid itemsWithTitle={postsWithTitle} />
         ) : (
           <Feed itemsWithTitle={postsWithTitle} />
         )}
       </Wrapper>
-    </>
+      <Route exact={true} path="**/gallery/:postId" component={Gallery} />
+    </Fragment>
   );
 };
 

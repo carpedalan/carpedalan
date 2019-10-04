@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
-
 // import format from 'date-fns/format';
 // import fromUnixTime from 'date-fns/fromUnixTime';
 import { PostsWithTagsWithFakes } from 'hooks/usePosts';

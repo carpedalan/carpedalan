@@ -88,3 +88,12 @@ upload/*
 scripts/touch.js
 commands.sh
 dev-dump.sql
+/bin/
+node_modules/
+**/node_modules/
+.coverage
+docs
+coverage
+dist
+*.zip
+.sql

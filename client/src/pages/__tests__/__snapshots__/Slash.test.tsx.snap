@@ -16,5 +16,10 @@ exports[`<Slash /> should match snapshot 1`] = `
       itemsWithTitle={Array []}
     />
   </styled.div>
+  <Route
+    component={[Function]}
+    exact={true}
+    path="**/gallery/:postId"
+  />
 </Fragment>
 `;

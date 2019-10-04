@@ -10,6 +10,7 @@ import Input from 'styles/Input';
 import { InputForm, InputWrapper, StyledButton, StyledTitle } from './styles';
 
 const { useState } = React;
+
 /**
  * Post Invitation api caller
  *
