@@ -68,6 +68,7 @@ describe('POST /posts', () => {
       .send({ key: 'something' });
 
     validate(400, response);
+
     expect(response.body.errors[0].message).toMatch('should match pattern');
   });
 
