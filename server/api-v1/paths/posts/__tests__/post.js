@@ -27,27 +27,27 @@ describe('POST /posts', () => {
     validate(400, response);
   });
 
-  it("should return a return a 400 if the key insn't present", async () => {
-    const response = await writeUserAgent
-      .post('/v1/posts')
-      .set('Content-Type', 'application/json');
+  // it("should return a return a 400 if the key insn't present", async () => {
+  //   const response = await writeUserAgent
+  //     .post('/v1/posts')
+  //     .set('Content-Type', 'application/json');
 
-    validate(400, response);
-    expect(response.body.errors[0].message).toMatch(
-      "should have required property 'key'",
-    );
-  });
+  //   validate(400, response);
+  //   expect(response.body.errors[0].message).toMatch(
+  //     "should have required property 'key'",
+  //   );
+  // });
 
-  it("should return a return a 400 the content type isn't specified", async () => {
-    const response = await writeUserAgent
-      .post('/v1/posts')
-      .set('Content-Type', 'application/json');
+  // it("should return a return a 400 the content type isn't specified", async () => {
+  //   const response = await writeUserAgent
+  //     .post('/v1/posts')
+  //     .set('Content-Type', 'application/json');
 
-    validate(400, response);
-    expect(response.body.errors[0].message).toMatch(
-      "should have required property 'key'",
-    );
-  });
+  //   validate(400, response);
+  //   expect(response.body.errors[0].message).toMatch(
+  //     "should have required property 'key'",
+  //   );
+  // });
 
   it('should return a return a 400 the additional fields are specified', async () => {
     const response = await writeUserAgent
