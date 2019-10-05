@@ -25,9 +25,7 @@ function getS3Parameters(config, filename) {
   const dateString = date.substr(0, 4) + date.substr(5, 2) + date.substr(8, 2);
 
   // create upload credentials
-  const credential = `${config.access_key}/${dateString}/${
-    config.region
-  }/s3/aws4_request`;
+  const credential = `${config.access_key}/${dateString}/${config.region}/s3/aws4_request`;
 
   // create policy
   const policy = {

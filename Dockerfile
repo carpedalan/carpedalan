@@ -3,7 +3,7 @@ WORKDIR /app
 COPY yarn.lock .
 
 COPY package.json .
-RUN apk add curl=7.64.0-r2 git=2.20.1-r0
+RUN apk add curl git
 RUN yarn --production --ignore-optional
 COPY server/ ./server
 COPY shared/ ./shared
