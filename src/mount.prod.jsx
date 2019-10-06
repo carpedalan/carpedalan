@@ -18,7 +18,10 @@ if (!isCi) {
 
   Sentry.configureScope(scope => {
     scope.addEventProcessor(async event => {
-      event.extra.sessionURL = LogRocket.sessionURL; // eslint-disable-line
+      LogRocket.getSessionURL(sessionURL => {
+        event.extra.sessionURL = sessionURL; // eslint-disable-line
+      });
+
       return event;
     });
   });
