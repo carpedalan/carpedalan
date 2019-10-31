@@ -196,6 +196,9 @@ jobs:
     machine: true
     working_directory: ~/repo
     parallelism: 1
+    branches:
+      only:
+        - master    
     steps:
       - checkout
       - run: 
