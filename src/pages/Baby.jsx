@@ -40,7 +40,7 @@ export default function Baby({ history }) {
   return (
     <Dialog onClose={() => history.push('/')} type="copy">
       {/* eslint-disable react/jsx-one-expression-per-line */}
-      <FancyTitle center>Ramsay Carla Dalan</FancyTitle>
+      <FancyTitle center>Maryn Carla Dalan</FancyTitle>
       <CenteredP>
         July 9, 2019
         <br />
