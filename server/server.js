@@ -34,7 +34,7 @@ import router from './routes';
 const app = express();
 let clientAssets = false;
 if (isProd) {
-  const manifest = require('./manifest.json'); // eslint-disable-line global-require,import/no-unresolved
+  const manifest = require('./dist/manifest.json'); // eslint-disable-line global-require,import/no-unresolved
   clientAssets = assets.map(asset => manifest[asset]);
 }
 
@@ -166,11 +166,11 @@ export const setup = () => {
   router(app, openApiDoc);
 
   if (isProd) {
-    const Sentry = require('@sentry/node'); // eslint-disable-line
-    Sentry.init({
-      dsn: 'https://c5f5ee9e1c904e618af3e609d3fdd7d2@sentry.io/1380082',
-    });
-    app.use(Sentry.Handlers.errorHandler());
+    // const Sentry = require('@sentry/node'); // eslint-disable-line
+    // Sentry.init({
+    //   dsn: 'https://c5f5ee9e1c904e618af3e609d3fdd7d2@sentry.io/1380082',
+    // });
+    // app.use(Sentry.Handlers.errorHandler());
   }
 
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars,prettier/prettier

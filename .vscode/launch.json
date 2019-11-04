@@ -21,6 +21,17 @@
       "sourceMaps": true
     },
     {
+      "type": "node",
+      "request": "attach",
+      "name": "Lambda",
+      "restart": true,
+      "protocol": "inspector",
+      "localRoot": "${workspaceFolder}/imageResizer/src",
+      "remoteRoot": "/var/task",
+      "port": 5858,
+      "sourceMaps": true
+    },
+    {
       "name": "Client",
       "type": "chrome",
       "request": "attach",

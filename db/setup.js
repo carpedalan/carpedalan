@@ -12,7 +12,7 @@ dotenv.config({
     '.env.example',
   ),
 });
-
+console.log('console, pg');
 module.exports = {
   development: {
     client: 'pg',

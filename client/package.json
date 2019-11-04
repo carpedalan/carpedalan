@@ -1,4 +1,6 @@
 {
+  "name": "carpedalan-client-app",
+  "version": "1.0.0",
   "scripts": {
     "build:prod": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\"}' NODE_ENV=production webpack --config webpack.config.prod.js --mode=production",
     "build": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\"}' webpack --config webpack.config.js --mode=development",

@@ -50,7 +50,7 @@
   </script>
   {{#if clientAssets}}
     {{#each clientAssets}}
-    <script type="text/javascript" src="{{this}}"></script>
+    <script type="text/javascript" src="https://{{this}}"></script>
     {{/each}}
   {{else}}
   <script type="text/javascript" src="//local.carpedalan.com/dist/client.bundle.js"></script>
@@ -59,7 +59,7 @@
   {{#unless ci}}
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- Branch: {{branch}} - Build: {{buildNum}} - sha1 = {{sha1}}-->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133308117-1"></script>
+  {{!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133308117-1"></script> --}}
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}

@@ -1,0 +1,10 @@
+image: pulumi/pulumi
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - pulumi login s3://carpedalan-pulumi
+    - pulumi up --yes --no-interactive

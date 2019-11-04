@@ -1,0 +1,4 @@
+name: carpedalan
+runtime: nodejs
+description: The Dalan family webapp
+main: infra/index.ts

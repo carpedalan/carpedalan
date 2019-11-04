@@ -2,13 +2,13 @@ import cf from 'aws-cloudfront-sign';
 
 import { AWSError } from '../../errors';
 import { CF_TIMEOUT } from '../../../shared/constants';
-import { cdnDomain, cfKey, domain } from '../../config';
+import { cdnDomain, privateKey, cfKey, domain } from '../../config';
 
 export default function setSignedCloudfrontCookie(res) {
   try {
     const options = {
       keypairId: cfKey,
-      privateKeyPath: `/app/server/cfkeys/pk-${cfKey}.pem`,
+      privateKeyString: privateKey,
       expireTime: new Date().getTime() + CF_TIMEOUT,
     };
     const signedCookies = cf.getSignedCookies(

@@ -13,7 +13,7 @@
     "migrate": "MIGRATING=true ./scripts/migrate.sh",
     "migrateAndStart": "MIGRATING=true yarn migrateAndSeed && DEBUG=knex*,-knex:client,-knex:connection,-knex:pool nodemon --inspect=0.0.0.0 ./server",
     "start": "DEBUG=knex*,-knex:client,-knex:connection,-knex:pool nodemon --inspect=0.0.0.0 .",
-    "start:prod": "NODE_ENV=production node .",
+    "start:prod": "MIGRATING=true NODE_ENV=production ./scripts/migrate.sh && NODE_ENV=production node .",
     "u": "docker-compose up",
     "d": "docker-compose down",
     "du": "docker-compose down && docker-compose up",

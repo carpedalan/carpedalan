@@ -21,7 +21,7 @@ module.exports = {
     path: path.resolve('dist'),
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: `//${process.env.ASSET_CDN_DOMAIN}/`,
+    publicPath: `/`,
   },
   resolve: {
     /** Base directories that Webpack will look to resolve absolutely imported modules */
@@ -63,26 +63,26 @@ module.exports = {
       },
     }),
     new Manifest({
-      fileName: `manifest-${process.env.CIRCLE_SHA1}.json`,
+      fileName: `manifest.json`,
     }),
     new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
     new CompressionPlugin({
-      exclude: `manifest-${process.env.CIRCLE_SHA1}.json`,
+      exclude: `manifest.json`,
       filename: '[path]',
     }),
 
     new Stylish(),
-    new S3Plugin({
-      // s3Options are required
-      s3Options: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: 'us-west-2',
-      },
-      s3UploadOptions: {
-        Bucket: process.env.S3_ASSETS_BUCKET,
-        ContentEncoding: 'gzip',
-      },
-    }),
+    // new S3Plugin({
+    //   // s3Options are required
+    //   s3Options: {
+    //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    //     region: 'us-west-2',
+    //   },
+    //   s3UploadOptions: {
+    //     Bucket: process.env.S3_ASSETS_BUCKET,
+    //     ContentEncoding: 'gzip',
+    //   },
+    // }),
   ],
 };

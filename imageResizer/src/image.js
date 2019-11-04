@@ -11,7 +11,7 @@ const { SIZES, EXIFPROPS } = require('./constants');
 
 const s3 = new aws.S3();
 
-exports.handler = async (event, context, ...otherThingz) => {
+exports.imageResizer = async (event, context, ...otherThingz) => {
   context.callbackWaitsForEmptyEventLoop = false; // eslint-disable-line
   console.time('fire');
   console.log('EVENT=============');
@@ -27,6 +27,7 @@ exports.handler = async (event, context, ...otherThingz) => {
 
   let buffer;
   try {
+    console.log('hello?');
     console.time('s3');
     buffer = await s3
       .getObject({
